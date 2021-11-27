@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: '16'
     - name: "Install OS Dependencies"
-      if: ${{ runner.os == "Linux" }}
+      if: ${{ runner.os == 'Linux' }}
       run: sudo apt-get install libxtst-dev libpng++-dev
     - name: "Install"
       run: npm install
