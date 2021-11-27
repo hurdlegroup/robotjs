@@ -17,6 +17,9 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: '16'
+    - name: "Install OS Dependencies"
+      if: ${{ runner.os == "Linux" }}
+      run: sudo apt-get install libxtst-dev libpng++-dev
     - name: "Install"
       run: npm install
     - name: "Install Prebuild"
