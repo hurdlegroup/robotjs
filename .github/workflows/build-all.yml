@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: '16'
     - name: "Install Node Addon API"
-      run: npm install -g node-addon-api
+      run: npm install node-addon-api
     - name: "Install Prebuild"
       run: npm install -g prebuild
     - name: "Prebuild Node"
