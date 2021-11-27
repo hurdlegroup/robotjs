@@ -10,9 +10,6 @@ jobs:
         nodeBuild: [16.13.0, 14.18.1]
         electBuild: [15.3.2, 14.2.1]
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        working-directory: ./
     steps:
     - name: "Checkout Code"
       uses: actions/checkout@v2
