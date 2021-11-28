@@ -1,8 +1,8 @@
 name: Build all versions
 on:
   push:
-    branches:
-      - '!master'
+    branches-ignore:
+      - master
 jobs:
   BuildAll:
     strategy:
