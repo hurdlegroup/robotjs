@@ -1,3 +1,15 @@
+# [0.10.0](https://github.com/hurdlegroup/robotjs/compare/v0.9.0...v0.10.0) (2021-11-28)
+
+
+### Bug Fixes
+
+* perms ([f921888](https://github.com/hurdlegroup/robotjs/commit/f921888b0e8496f4717b1d12b97bdaca91b9f7a2))
+
+
+### Features
+
+* move to N-API v3 ([806c694](https://github.com/hurdlegroup/robotjs/commit/806c69434d1d9c98bb9ac8b88340736f05a94135))
+
 # [0.9.0](https://github.com/hurdlegroup/robotjs/compare/v0.8.7...v0.9.0) (2021-11-28)
 
 
