@@ -47,7 +47,7 @@ jobs:
       run: sudo apt-get install libxtst-dev libpng++-dev gcc-multilib g++-multilib -y
     - name: Install OS Dependencies (32-bit)
       if: ${{ runner.os == 'Linux' && matrix.arch == 'ia32' }}
-      run: sudo apt-get install libxtst-dev:i386 libpng++-dev:i386 gcc-multilib g++-multilib -y
+      run: dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install libxtst-dev:i386 libpng++-dev:i386 gcc-multilib g++-multilib -y
 #    - name: Remove existing package.json (Unix)
 #      if: ${{ runner.os != 'Windows' }}
 #      run: rm -f package.json
