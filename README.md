@@ -1,16 +1,17 @@
 <p align="center"><img src="https://cldup.com/1ATDf2JMtv.png"></p>
 
-<p align="center"><a href="https://travis-ci.org/octalmage/robotjs"><img src="https://api.travis-ci.org/octalmage/robotjs.svg?branch=master"></a> <a href="https://ci.appveyor.com/project/octalmage/robotjs"><img src="https://ci.appveyor.com/api/projects/status/qh2eqb37j7ap6x36?svg=true"></a> <a href="https://www.npmjs.com/package/robotjs"><img src="https://img.shields.io/npm/v/robotjs.svg"></a> <a href="https://gitter.im/octalmage/robotjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://img.shields.io/badge/gitter-join%20chat-blue.svg"></a> <a href="http://waffle.io/octalmage/robotjs"><img src="https://img.shields.io/waffle/label/octalmage/robotjs/ready.svg?maxAge=3600"></a></p>
+[![Build all versions and publish to NPM](https://github.com/hurdlegroup/robotjs/actions/workflows/build-all.yml/badge.svg)](https://github.com/hurdlegroup/robotjs/actions/workflows/build-all.yml)
+<a href="https://www.npmjs.com/package/robotjs"><img src="https://img.shields.io/npm/v/@hurdlegroup/robotjs.svg"></a>
 
 > Node.js Desktop Automation. Control the mouse, keyboard, and read the screen.
 
-RobotJS supports Mac, [Windows](https://github.com/octalmage/robotjs/issues/2), and [Linux](https://github.com/octalmage/robotjs/issues/17).
+**This is a fork of the original unmaintained RobotJS by OctalMage found here: [octalmage/robotjs](https://github.com/octalmage/robotjs)**
 
-This is a work in progress so the exported functions could change at any time before the first stable release (1.0.0). [Ideas?](https://github.com/octalmage/robotjs/issues/4)
+RobotJS supports Mac, [Windows](https://github.com/hurdlegroup/robotjs/issues/2), and [Linux](https://github.com/hurdlegroup/robotjs/issues/17).
 
-[Check out some of the cool things people are making with  RobotJS](https://github.com/octalmage/robotjs/wiki/Projects-using-RobotJS)! Have your own rad RobotJS project? Feel free to add it!
+This is a work in progress so the exported functions could change at any time before the first stable release (1.0.0). [Ideas?](https://github.com/hurdlegroup/robotjs/issues/4)
 
-<p align="center"><a href="https://twitter.com/robotjavascript"><img width="300" src="https://cldup.com/Et-C6_ue45.png"></a><a href="http://blog.robotjs.io"><img width="300" src="https://cldup.com/3apDirNmSB.png"></a></p>
+[Check out some of the cool things people are making with  RobotJS](https://github.com/hurdlegroup/robotjs/wiki/Projects-using-RobotJS)! Have your own rad RobotJS project? Feel free to add it!
 
 ## Contents
 
@@ -28,17 +29,17 @@ This is a work in progress so the exported functions could change at any time be
 Install RobotJS using npm:
 
 ```
-npm install robotjs
+npm install @hurdlegroup/robotjs
 ```
-It's that easy! npm will download one of the prebuilt [binaries](https://github.com/octalmage/robotjs/releases/latest) for your OS.
+It's that easy! npm will download one of the prebuilt [binaries](https://github.com/hurdlegroup/robotjs/releases/latest) for your OS.
 
 You can get npm [here](https://nodejs.org/en/download/) if you don't have it installed.
 
-If you need to build RobotJS, see the [building](#building) section. Instructions for [Electron](https://github.com/octalmage/robotjs/wiki/Electron).
+If you need to build RobotJS, see the [building](#building) section. Instructions for [Electron](https://github.com/hurdlegroup/robotjs/wiki/Electron).
 
 ## Examples
 
-##### [Mouse](https://github.com/octalmage/robotjs/wiki/Syntax#mouse)
+##### [Mouse](https://github.com/hurdlegroup/robotjs/wiki/Syntax#mouse)
 
 <p align="center"><img src="https://cldup.com/lugVjjAkEi.gif"></p>
 
@@ -61,7 +62,7 @@ for (var x = 0; x < width; x++)
 }
 ```
 
-##### [Keyboard](https://github.com/octalmage/robotjs/wiki/Syntax#keyboard)
+##### [Keyboard](https://github.com/hurdlegroup/robotjs/wiki/Syntax#keyboard)
 
 ```JavaScript
 // Type "Hello World" then press enter.
@@ -74,7 +75,7 @@ robot.typeString("Hello World");
 robot.keyTap("enter");
 ```
 
-##### [Screen](https://github.com/octalmage/robotjs/wiki/Syntax#screen)
+##### [Screen](https://github.com/hurdlegroup/robotjs/wiki/Syntax#screen)
 
 ```JavaScript
 // Get pixel color under the mouse.
@@ -87,7 +88,7 @@ var mouse = robot.getMousePos();
 var hex = robot.getPixelColor(mouse.x, mouse.y);
 console.log("#" + hex + " at x:" + mouse.x + " y:" + mouse.y);
 ```
-Read the [Wiki](https://github.com/octalmage/robotjs/wiki) for more information!
+Read the [Wiki](https://github.com/hurdlegroup/robotjs/wiki) for more information!
 
 ## [API](http://robotjs.io/docs/syntax)
 
@@ -142,11 +143,11 @@ See the [node-gyp readme](https://github.com/nodejs/node-gyp#installation) for m
 
 #### Does RobotJS support global hotkeys? 
 
-Not currently, and I don't know if it ever will. I personally use [Electron](http://electron.atom.io/)/[NW.js](http://nwjs.io/) for global hotkeys, and this works well. Later on I might add hotkey support or create a separate module. See [#55](https://github.com/octalmage/robotjs/issues/55) for details. 
+Not currently, and I don't know if it ever will. I personally use [Electron](http://electron.atom.io/)/[NW.js](http://nwjs.io/) for global hotkeys, and this works well. Later on I might add hotkey support or create a separate module. See [#55](https://github.com/hurdlegroup/robotjs/issues/55) for details. 
 
 #### Can I take a screenshot with RobotJS? 
 
-Soon! This is a bit more complicated than the rest of the features, so I saved it for last. Luckily the code is already there, I just need to write the bindings, and I've already started. Subscribe to [#13](https://github.com/octalmage/robotjs/issues/13) for updates. 
+Soon! This is a bit more complicated than the rest of the features, so I saved it for last. Luckily the code is already there, I just need to write the bindings, and I've already started. Subscribe to [#13](https://github.com/hurdlegroup/robotjs/issues/13) for updates. 
 
 #### Why is &#60;insert key&#62; missing from the keyboard functions? 
 
@@ -154,9 +155,9 @@ We've been implementing keys as we need them. Feel free to create an issue or su
 
 #### How about multi-monitor support?
 
-The library doesn't have explicit multi-monitor support, so anything that works is kind of on accident. Subscribe to [#88](https://github.com/octalmage/robotjs/issues/88) for updates.
+The library doesn't have explicit multi-monitor support, so anything that works is kind of on accident. Subscribe to [#88](https://github.com/hurdlegroup/robotjs/issues/88) for updates.
 
-For any other questions please [submit an issue](https://github.com/octalmage/robotjs/issues/new).
+For any other questions please [submit an issue](https://github.com/hurdlegroup/robotjs/issues/new).
 
 ## Story
 
@@ -171,4 +172,4 @@ I like AutoHotkey, but I like Node.js more. By developing RobotJS I get an AutoH
 MIT
 
 Based on [autopy](https://github.com/msanders/autopy). 
-Maintained by [Jason Stallings](http://jason.stallin.gs).
+Maintained by [Daniel McAssey](https://glokon.me).
