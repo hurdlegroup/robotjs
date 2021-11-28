@@ -9,8 +9,9 @@
     "test:darwin:linux": "jasmine test/**/*.js",
     "test-keyboard": "node test/keyboard.js",
     "test:win32": "jasmine test/**/*.js",
-    "install": "prebuild-install || node-gyp rebuild",
-    "install-debug": "prebuild-install || node-gyp rebuild --debug"
+    "install": "prebuild-install --runtime napi || node-gyp rebuild",
+    "install-debug": "prebuild-install --runtime napi || node-gyp rebuild --debug",
+    "prebuild": "prebuild --all --runtime napi"
   },
   "repository": {
     "type": "git",

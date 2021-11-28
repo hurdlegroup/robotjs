@@ -26,7 +26,5 @@ jobs:
       run: sudo apt-get install libxtst-dev:i386 libpng++-dev:i386 gcc-multilib g++-multilib -y
     - name: Install dependencies
       run: npm ci
-    - name: Prebuild Node
-      run: npx prebuild -t 16.13.0 -t 14.18.1 --arch=${{ matrix.arch }}
-    - name: Prebuild Latest Electron
-      run: npx prebuild -t 16.0.0 -t 15.3.2 -t 14.2.1 -t 13.6.1 -r electron --arch=${{ matrix.arch }}
+    - name: Prebuild All
+      run: npx prebuild --all --runtime napi --arch=${{ matrix.arch }}
