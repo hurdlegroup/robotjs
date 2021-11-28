@@ -48,12 +48,12 @@ jobs:
     - name: Install OS Dependencies (32-bit)
       if: ${{ runner.os == 'Linux' && matrix.arch == 'ia32' }}
       run: sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install libxtst-dev:i386 libpng++-dev:i386 gcc-multilib g++-multilib -y
-    - name: Remove existing package.json (Unix)
-      if: ${{ runner.os != 'Windows' }}
-      run: rm -f package.json
-    - name: Remove existing package.json (Unix)
-      if: ${{ runner.os == 'Windows' }}
-      run: Remove-Item "package.json" -ErrorAction Ignore
+#    - name: Remove existing package.json (Unix)
+#      if: ${{ runner.os != 'Windows' }}
+#      run: rm -f package.json
+#    - name: Remove existing package.json (Unix)
+#      if: ${{ runner.os == 'Windows' }}
+#      run: Remove-Item "package.json" -ErrorAction Ignore
 #    - uses: actions/download-artifact@v2
 #      with:
 #        name: package-json
