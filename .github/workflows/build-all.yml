@@ -1,10 +1,8 @@
 name: Build all versions and publish to NPM
-on:
-  push:
-    branches:
-      - 'master'
+on: push
 jobs:
-  Publish-NPM:
+  PublishOnNpm:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -28,13 +26,26 @@ jobs:
           name: package-json
           path: package.json
   BuildAll:
-    needs: Publish-NPM
+    needs: PublishOnNpm
+    if: always() && (needs.PublishOnNpm.result == 'success' || needs.PublishOnNpm.result == 'skipped')
+    name: Build ${{ matrix.build-group }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-        arch: [ia32, x64]
-    runs-on: ${{ matrix.os }}
+        include:
+          - os: ubuntu-20.04
+            arch: x64
+            build-group: linux-x64
+          - os: macos-11
+            arch: x64
+            build-group: darwin-universal
+          - os: windows-2019
+            arch: x86
+            build-group: win32-x86
+          - os: windows-2019
+            arch: x64
+            build-group: win32-x64
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
@@ -42,19 +53,14 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 'lts/*'
+        architecture: ${{ matrix.arch }}
     - name: Install OS Dependencies
       if: ${{ runner.os == 'Linux' && matrix.arch == 'x64' }}
       run: sudo apt-get install libxtst-dev libpng++-dev gcc-multilib g++-multilib -y
-    - name: Install OS Dependencies (32-bit)
-      if: ${{ runner.os == 'Linux' && matrix.arch == 'ia32' }}
-      run: sudo dpkg --add-architecture i386 && sudo apt-get update && sudo apt-get install libxtst-dev:i386 libpng++-dev:i386 gcc-multilib g++-multilib -y
-    - name: Fix Symbolic Link for Lib (32-bit)
-      if: ${{ runner.os == 'Linux' && matrix.arch == 'ia32' }}
-      run: sudo ln -s /usr/lib32/libXtst.so.6 /usr/lib/libXtst.so
     - name: Remove existing package.json (Unix)
       if: ${{ runner.os != 'Windows' }}
       run: rm -f package.json
-    - name: Remove existing package.json (Unix)
+    - name: Remove existing package.json (Windows)
       if: ${{ runner.os == 'Windows' }}
       run: Remove-Item "package.json" -ErrorAction Ignore
     - uses: actions/download-artifact@v2
@@ -63,4 +69,8 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Prebuild All
+      if: github.ref != 'refs/heads/master'
+      run: npx prebuild --all --runtime napi --arch=${{ matrix.arch }}
+    - name: Prebuild All (With Publish)
+      if: github.ref == 'refs/heads/master'
       run: npx prebuild --all --runtime napi --arch=${{ matrix.arch }} -u ${{ secrets.GITHUB_TOKEN }}
