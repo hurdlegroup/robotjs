@@ -23,11 +23,11 @@ jobs:
     env:
       BUILD_GROUP: ${{ matrix.build-group }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install OS Dependencies
         if: runner.os == 'Linux'
         run: sudo apt-get install libxtst-dev libpng++-dev gcc g++ -y
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
           architecture: ${{ matrix.arch }}
@@ -46,9 +46,9 @@ jobs:
     needs: build
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
       - name: Install OS Dependencies
