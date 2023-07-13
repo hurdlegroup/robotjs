@@ -1,7 +1,46 @@
 name: Build all versions and publish to NPM
 on: push
 jobs:
-  PublishOnNpm:
+  build:
+    name: Build ${{ matrix.build-group }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            arch: x64
+            build-group: linux-x64
+          - os: macos-11
+            arch: x64
+            build-group: darwin-universal
+          - os: windows-2019
+            arch: x86
+            build-group: win32-x86
+          - os: windows-2019
+            arch: x64
+            build-group: win32-x64
+    env:
+      BUILD_GROUP: ${{ matrix.build-group }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          architecture: ${{ matrix.arch }}
+      - run: npm install
+      - name: Install OS Dependencies
+        if: runner.os == 'Linux' && matrix.arch == 'x64'
+        run: sudo apt-get install libxtst-dev libpng++-dev gcc-multilib g++-multilib -y
+      - uses: actions/download-artifact@v2
+      - name: Prebuildify
+        run: npm run prebuild-$BUILD_GROUP
+        shell: bash
+      - uses: actions/upload-artifact@v2
+        with:
+          name: prebuilds
+          path: prebuilds/
+  publish:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
@@ -16,62 +55,12 @@ jobs:
         run: sudo apt-get install libxtst-dev libpng++-dev -y
       - name: Install dependencies
         run: npm ci
+      - uses: actions/download-artifact@v2
+        with:
+          name: prebuilds
+          path: prebuilds
       - name: Publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
-      - uses: actions/upload-artifact@v2
-        with:
-          name: package-json
-          path: package.json
-  BuildAll:
-    needs: PublishOnNpm
-    if: always() && (needs.PublishOnNpm.result == 'success' || needs.PublishOnNpm.result == 'skipped')
-    name: Build ${{ matrix.build-group }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: ubuntu-20.04
-            arch: x64
-            build-group: linux-x64
-          - os: macos-11
-            arch: x64
-            build-group: darwin-universal
-          - os: windows-2019
-            arch: x86
-            build-group: win32-x86
-          - os: windows-2019
-            arch: x64
-            build-group: win32-x64
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
-    - name: Setup Node
-      uses: actions/setup-node@v2
-      with:
-        node-version: 'lts/*'
-        architecture: ${{ matrix.arch }}
-    - name: Install OS Dependencies
-      if: runner.os == 'Linux' && matrix.arch == 'x64'
-      run: sudo apt-get install libxtst-dev libpng++-dev gcc-multilib g++-multilib -y
-    - name: Remove existing package.json (Unix)
-      if: runner.os != 'Windows' && github.ref == 'refs/heads/master'
-      run: rm -f package.json
-    - name: Remove existing package.json (Windows)
-      if: runner.os == 'Windows' && github.ref == 'refs/heads/master'
-      run: Remove-Item "package.json" -ErrorAction Ignore
-    - uses: actions/download-artifact@v2
-      if: github.ref == 'refs/heads/master'
-      with:
-        name: package-json
-    - name: Install dependencies
-      run: npm ci
-    - name: Prebuild All
-      if: github.ref != 'refs/heads/master'
-      run: npx prebuild --all --runtime napi --arch=${{ matrix.arch }}
-    - name: Prebuild All (With Publish)
-      if: github.ref == 'refs/heads/master'
-      run: npx prebuild --all --runtime napi --arch=${{ matrix.arch }} -u ${{ secrets.GITHUB_TOKEN }}

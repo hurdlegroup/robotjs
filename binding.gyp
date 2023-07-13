@@ -3,9 +3,17 @@
     'target_name': 'robotjs',
       'cflags!': [ '-fno-exceptions' ],
       'cflags_cc!': [ '-fno-exceptions' ],
-      'xcode_settings': { 'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
+	  'xcode_settings': { 'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
         'CLANG_CXX_LIBRARY': 'libc++',
         'MACOSX_DEPLOYMENT_TARGET': '10.7',
+        'OTHER_CFLAGS': [
+          '-arch x86_64',
+          '-arch arm64'
+        ],
+        'OTHER_LDFLAGS': [
+          '-arch x86_64',
+          '-arch arm64'
+        ]
       },
       'msvs_settings': {
         'VCCLCompilerTool': { 'ExceptionHandling': 1 },
@@ -13,7 +21,7 @@
     'include_dirs': [
       '<!(node -p "require(\'node-addon-api\').include_dir")',
     ],
-    
+
     'conditions': [
       ['OS == "mac"', {
         'include_dirs': [
@@ -32,7 +40,7 @@
           ]
         }
       }],
-      
+
       ['OS == "linux"', {
         'link_settings': {
           'libraries': [
@@ -42,7 +50,7 @@
             '-lXtst'
           ]
         },
-        
+
         'sources': [
           'src/xdisplay.c'
         ]
@@ -52,7 +60,7 @@
         'defines': ['IS_WINDOWS']
       }]
     ],
-    
+
     'sources': [
       'src/robotjs.cc',
       'src/deadbeef_rand.c',
