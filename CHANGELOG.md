@@ -1,3 +1,10 @@
+# [0.11.0](https://github.com/hurdlegroup/robotjs/compare/v0.10.2...v0.11.0) (2023-07-13)
+
+
+### Features
+
+* **ci:** use new packaging format ([c5495d3](https://github.com/hurdlegroup/robotjs/commit/c5495d332de08a670d85ef768ae3505f9777c5c2))
+
 ## [0.10.2](https://github.com/hurdlegroup/robotjs/compare/v0.10.1...v0.10.2) (2023-07-13)
 
 
