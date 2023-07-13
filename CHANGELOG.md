@@ -1,3 +1,10 @@
+## [0.11.1](https://github.com/hurdlegroup/robotjs/compare/v0.11.0...v0.11.1) (2023-07-13)
+
+
+### Bug Fixes
+
+* **lib:** use correct dependency ([d1ad34e](https://github.com/hurdlegroup/robotjs/commit/d1ad34e507470d19830f6d5e279e9b467b7d74ee))
+
 # [0.11.0](https://github.com/hurdlegroup/robotjs/compare/v0.10.2...v0.11.0) (2023-07-13)
 
 
