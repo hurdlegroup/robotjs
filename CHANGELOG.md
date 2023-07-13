@@ -1,3 +1,11 @@
+## [0.10.1](https://github.com/hurdlegroup/robotjs/compare/v0.10.0...v0.10.1) (2023-07-13)
+
+
+### Bug Fixes
+
+* **keycode:** Fix createStringForKey segmentation fault on Mac OS for non-Latin languages ([b19932e](https://github.com/hurdlegroup/robotjs/commit/b19932ef008940ac3f3deb879064342c8b70aff6))
+* **X11:** Don't wait for a response from X when typing a key ([a5ad9ff](https://github.com/hurdlegroup/robotjs/commit/a5ad9ffb744a5dc71bc216dc4810d32d24e33af5))
+
 # [0.10.0](https://github.com/hurdlegroup/robotjs/compare/v0.9.0...v0.10.0) (2021-11-28)
 
 
