@@ -1,3 +1,10 @@
+## [0.10.2](https://github.com/hurdlegroup/robotjs/compare/v0.10.1...v0.10.2) (2023-07-13)
+
+
+### Bug Fixes
+
+* **ci:** further simplify build and remove 32-bit Linux ([#8](https://github.com/hurdlegroup/robotjs/issues/8)) ([5044760](https://github.com/hurdlegroup/robotjs/commit/5044760883622e3786ff7408c687cb75af9cf29a))
+
 ## [0.10.1](https://github.com/hurdlegroup/robotjs/compare/v0.10.0...v0.10.1) (2023-07-13)
 
 
