@@ -24,14 +24,14 @@ jobs:
       BUILD_GROUP: ${{ matrix.build-group }}
     steps:
       - uses: actions/checkout@v2
+      - name: Install OS Dependencies
+        if: runner.os == 'Linux' && matrix.arch == 'x64'
+        run: sudo apt-get install libxtst-dev libpng++-dev gcc-multilib g++-multilib -y
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
           architecture: ${{ matrix.arch }}
       - run: npm install
-      - name: Install OS Dependencies
-        if: runner.os == 'Linux' && matrix.arch == 'x64'
-        run: sudo apt-get install libxtst-dev libpng++-dev gcc-multilib g++-multilib -y
       - uses: actions/download-artifact@v2
       - name: Prebuildify
         run: npm run prebuild-$BUILD_GROUP
