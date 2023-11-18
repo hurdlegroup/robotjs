@@ -33,6 +33,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
+          cache: 'npm'
           architecture: ${{ matrix.arch }}
       - run: npm install
       - name: Prebuildify
@@ -53,6 +54,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 'lts/*'
+          cache: 'npm'
       - name: Install OS Dependencies
         if: runner.os == 'Linux'
         run: sudo apt-get install libxtst-dev libpng++-dev gcc g++ -y
