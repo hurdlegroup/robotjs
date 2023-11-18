@@ -27,9 +27,12 @@ jobs:
       - name: Install OS Dependencies
         if: runner.os == 'Linux'
         run: sudo apt-get install libxtst-dev libpng++-dev gcc g++ -y
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: 'lts/*'
           architecture: ${{ matrix.arch }}
       - run: npm install
       - name: Prebuildify
