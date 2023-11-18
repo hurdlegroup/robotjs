@@ -1,3 +1,10 @@
+## [0.11.2](https://github.com/hurdlegroup/robotjs/compare/v0.11.1...v0.11.2) (2023-11-18)
+
+
+### Bug Fixes
+
+* **app:** update node target ([21c562c](https://github.com/hurdlegroup/robotjs/commit/21c562cca2420274cc6bfb0f99db10ebe9a00698))
+
 ## [0.11.1](https://github.com/hurdlegroup/robotjs/compare/v0.11.0...v0.11.1) (2023-07-13)
 
 
