@@ -1,3 +1,10 @@
+## [0.11.3](https://github.com/hurdlegroup/robotjs/compare/v0.11.2...v0.11.3) (2023-11-18)
+
+
+### Bug Fixes
+
+* **ci:** faster builds ([3b96278](https://github.com/hurdlegroup/robotjs/commit/3b96278b986b587958a19001d265224e2b754f64))
+
 ## [0.11.2](https://github.com/hurdlegroup/robotjs/compare/v0.11.1...v0.11.2) (2023-11-18)
 
 
