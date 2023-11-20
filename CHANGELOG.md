@@ -1,3 +1,13 @@
+## [0.11.4](https://github.com/hurdlegroup/robotjs/compare/v0.11.3...v0.11.4) (2023-11-20)
+
+
+### Bug Fixes
+
+* **app:** split binaries ([4f10836](https://github.com/hurdlegroup/robotjs/commit/4f10836b24c6c48a425f087dead065f28e415eef))
+* **app:** update node action ([013d212](https://github.com/hurdlegroup/robotjs/commit/013d212755766427c4519412a0288af789a5033c))
+* **ci:** fix missing script ([01f5ff5](https://github.com/hurdlegroup/robotjs/commit/01f5ff5d522b556141482b69c707109a9f7a0992))
+* **ci:** revert change ([7a1dc59](https://github.com/hurdlegroup/robotjs/commit/7a1dc59b8bff5a3590927de5e0d8299ea5057107))
+
 ## [0.11.3](https://github.com/hurdlegroup/robotjs/compare/v0.11.2...v0.11.3) (2023-11-18)
 
 
