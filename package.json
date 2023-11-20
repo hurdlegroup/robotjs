@@ -12,7 +12,8 @@
     "install": "node-gyp-build",
     "install-debug": "node-gyp-build --debug",
     "prebuild": "prebuildify -t 16.0.0 --napi --strip",
-    "prebuild-darwin-universal": "prebuildify --napi --strip --arch x64+arm64",
+    "prebuild-darwin-x64": "prebuildify --napi --strip --arch x64",
+    "prebuild-darwin-arm64": "prebuildify --napi --strip --arch arm64",
     "prebuild-linux-x64": "prebuildify --napi --strip --arch x64",
     "prebuild-win32-x86": "prebuildify --napi --strip --arch ia32",
     "prebuild-win32-x64": "prebuildify --napi --strip --arch x64"
