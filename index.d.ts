@@ -29,6 +29,7 @@ type Keys = 'backspace' | 'delete' | 'enter' | 'tab' | 'escape' | 'up' | 'down' 
 
 type MouseButton = 'left' | 'right' | 'middle';
 
+
 export function setKeyboardDelay(ms: number): void;
 export function keyTap(key: Keys | string, modifier?: string | string[]): void;
 export function keyToggle(key: Keys | string, down: string, modifier?: string | string[]): void;
