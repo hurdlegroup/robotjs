@@ -1,3 +1,10 @@
+## [0.11.5](https://github.com/hurdlegroup/robotjs/compare/v0.11.4...v0.11.5) (2024-03-27)
+
+
+### Bug Fixes
+
+* **robotjs:** force build and deploy ([6500ef1](https://github.com/hurdlegroup/robotjs/commit/6500ef1ad8edf4d38c4234524011f0c535c6e7c6))
+
 ## [0.11.4](https://github.com/hurdlegroup/robotjs/compare/v0.11.3...v0.11.4) (2023-11-20)
 
 
