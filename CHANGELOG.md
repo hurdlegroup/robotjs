@@ -1,3 +1,10 @@
+## [0.11.7](https://github.com/hurdlegroup/robotjs/compare/v0.11.6...v0.11.7) (2024-05-09)
+
+
+### Bug Fixes
+
+* **robotjs:** fix vertical scroll on Windows, fixes [#20](https://github.com/hurdlegroup/robotjs/issues/20) ([#21](https://github.com/hurdlegroup/robotjs/issues/21)) ([7d82481](https://github.com/hurdlegroup/robotjs/commit/7d82481a76a6181512b8b55892eb0d21094c76a8))
+
 ## [0.11.6](https://github.com/hurdlegroup/robotjs/compare/v0.11.5...v0.11.6) (2024-05-09)
 
 
