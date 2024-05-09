@@ -58,7 +58,7 @@
   "homepage": "https://github.com/hurdlegroup/robotjs",
   "dependencies": {
     "node-addon-api": "*",
-    "node-gyp-build": "^4.8.0"
+    "node-gyp-build": "^4.8.1"
   },
   "publishConfig": {
     "access": "public"
