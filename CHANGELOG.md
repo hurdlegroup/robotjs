@@ -1,3 +1,10 @@
+## [0.11.6](https://github.com/hurdlegroup/robotjs/compare/v0.11.5...v0.11.6) (2024-05-09)
+
+
+### Bug Fixes
+
+* **robotjs:** remove scan code for keyup ([#17](https://github.com/hurdlegroup/robotjs/issues/17)) ([61cb74d](https://github.com/hurdlegroup/robotjs/commit/61cb74d606e2ee0f14c2dec9fdfb457526763742))
+
 ## [0.11.5](https://github.com/hurdlegroup/robotjs/compare/v0.11.4...v0.11.5) (2024-03-27)
 
 
