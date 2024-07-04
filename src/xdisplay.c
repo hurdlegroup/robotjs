@@ -1,5 +1,12 @@
 #include "xdisplay.h"
 
+#ifdef __STDC_ALLOC_LIB__
+#define __STDC_WANT_LIB_EXT2__ 1
+#else
+#define _POSIX_C_SOURCE 200809L
+#endif
+
+#include <string.h> /* For strdup() */
 #include <stdio.h> /* For fputs() */
 #include <stdlib.h> /* For atexit() */
 
@@ -16,16 +23,15 @@ Display *XGetMainDisplay(void)
 		hasDisplayNameChanged = 0;
 	}
 
-	if (mainDisplay == NULL) {
-		/* First try the user set displayName */
-		mainDisplay = XOpenDisplay(displayName);
-
-		/* Then try using environment variable DISPLAY */
-		if (mainDisplay == NULL) {
-			mainDisplay = XOpenDisplay(NULL);
+	if (!mainDisplay) {
+		if (displayName) {
+		    mainDisplay = XOpenDisplay(displayName);
+		} else {
+		    /* Try using environment variable DISPLAY */
+		    mainDisplay = XOpenDisplay(NULL);
 		}
 
-		if (mainDisplay == NULL) {
+		if (!mainDisplay) {
 			fputs("Could not open main display\n", stderr);
 		} else if (!registered) {
 			atexit(&XCloseMainDisplay);
@@ -38,7 +44,7 @@ Display *XGetMainDisplay(void)
 
 void XCloseMainDisplay(void)
 {
-	if (mainDisplay != NULL) {
+	if (mainDisplay) {
 		XCloseDisplay(mainDisplay);
 		mainDisplay = NULL;
 	}
@@ -51,11 +57,11 @@ char *getXDisplay(void)
 
 void setXDisplay(const char *name)
 {
-    if (displayName != NULL) {
+    if (displayName) {
         free(displayName);
     }
 
-    if (name == NULL) {
+    if (!name) {
         displayName = NULL;
     } else {
     	displayName = strdup(name);

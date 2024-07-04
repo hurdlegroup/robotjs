@@ -157,25 +157,28 @@ void toggleKeyCode(MMKeyCode code, const bool down, MMKeyFlags flags)
 	}
 #elif defined(USE_X11)
 	Display *display = XGetMainDisplay();
-	const Bool is_press = down ? True : False; /* Just to be safe. */
 
-	if (down) {
-		/* Parse modifier keys. */
-		if (flags & MOD_META) X_KEY_EVENT_WAIT(display, K_META, is_press);
-		if (flags & MOD_ALT) X_KEY_EVENT_WAIT(display, K_ALT, is_press);
-		if (flags & MOD_CONTROL) X_KEY_EVENT_WAIT(display, K_CONTROL, is_press);
-		if (flags & MOD_SHIFT) X_KEY_EVENT_WAIT(display, K_SHIFT, is_press);
+	if (display) {
+		const Bool is_press = down ? True : False; /* Just to be safe. */
 
-		X_KEY_EVENT_WAIT(display, code, is_press);
-	} else {
-		/* Reverse order for key up */
-		X_KEY_EVENT_WAIT(display, code, is_press);
+    	if (down) {
+    		/* Parse modifier keys. */
+    		if (flags & MOD_META) X_KEY_EVENT_WAIT(display, K_META, is_press);
+    		if (flags & MOD_ALT) X_KEY_EVENT_WAIT(display, K_ALT, is_press);
+    		if (flags & MOD_CONTROL) X_KEY_EVENT_WAIT(display, K_CONTROL, is_press);
+    		if (flags & MOD_SHIFT) X_KEY_EVENT_WAIT(display, K_SHIFT, is_press);
 
-		/* Parse modifier keys. */
-		if (flags & MOD_META) X_KEY_EVENT(display, K_META, is_press);
-		if (flags & MOD_ALT) X_KEY_EVENT(display, K_ALT, is_press);
-		if (flags & MOD_CONTROL) X_KEY_EVENT(display, K_CONTROL, is_press);
-		if (flags & MOD_SHIFT) X_KEY_EVENT(display, K_SHIFT, is_press);
+    		X_KEY_EVENT_WAIT(display, code, is_press);
+    	} else {
+    		/* Reverse order for key up */
+    		X_KEY_EVENT_WAIT(display, code, is_press);
+
+    		/* Parse modifier keys. */
+    		if (flags & MOD_META) X_KEY_EVENT(display, K_META, is_press);
+    		if (flags & MOD_ALT) X_KEY_EVENT(display, K_ALT, is_press);
+    		if (flags & MOD_CONTROL) X_KEY_EVENT(display, K_CONTROL, is_press);
+    		if (flags & MOD_SHIFT) X_KEY_EVENT(display, K_SHIFT, is_press);
+    	}
 	}
 #endif
 }

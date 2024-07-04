@@ -16,10 +16,15 @@ MMSize getMainDisplaySize(void)
 	                  CGDisplayPixelsHigh(displayID));
 #elif defined(USE_X11)
 	Display *display = XGetMainDisplay();
-	const int screen = DefaultScreen(display);
 
-	return MMSizeMake((size_t)DisplayWidth(display, screen),
-	                  (size_t)DisplayHeight(display, screen));
+	if (display) {
+		const int screen = DefaultScreen(display);
+
+    	return MMSizeMake((size_t)DisplayWidth(display, screen),
+    	                  (size_t)DisplayHeight(display, screen));
+	} else {
+        return MMSizeMake((size_t)0, (size_t)0);
+	}
 #elif defined(IS_WINDOWS)
 	return MMSizeMake((size_t)GetSystemMetrics(SM_CXSCREEN),
 	                  (size_t)GetSystemMetrics(SM_CYSCREEN));

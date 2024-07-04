@@ -55,7 +55,7 @@ Napi::Value dragMouseWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() < 2 || info.Length() > 3)
 	{
-		throw Napi::Error::New(env, "Invalid number of arguments.");
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	const int32_t x = info[0].As<Napi::Number>().Int32Value();
@@ -70,9 +70,9 @@ Napi::Value dragMouseWrapper(const Napi::CallbackInfo& info)
 		switch (CheckMouseButton(b, &button))
 		{
 			case -1:
-				throw Napi::Error::New(env, "Null pointer in mouse button code.");
+				throw Napi::Error::New(env, "Null pointer in mouse button code");
 			case -2:
-				throw Napi::Error::New(env, "Invalid mouse button specified.");
+				throw Napi::Error::New(env, "Invalid mouse button specified");
 		}
 	}
 
@@ -99,7 +99,7 @@ Napi::Value moveMouseWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() != 2)
 	{
-		throw Napi::Error::New(env, "Invalid number of arguments.");
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	int32_t x = info[0].As<Napi::Number>().Int32Value();
@@ -119,7 +119,7 @@ Napi::Value moveMouseSmoothWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() > 3 || info.Length() < 2 )
 	{
-		throw Napi::Error::New(env, "Invalid number of arguments.");
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	size_t x = info[0].As<Napi::Number>().Int32Value();
@@ -170,9 +170,9 @@ Napi::Value mouseClickWrapper(const Napi::CallbackInfo& info)
 		switch (CheckMouseButton(b, &button))
 		{
 			case -1:
-				throw Napi::Error::New(env, "Null pointer in mouse button code.");
+				throw Napi::Error::New(env, "Null pointer in mouse button code");
 			case -2:
-				throw Napi::Error::New(env, "Invalid mouse button specified.");
+				throw Napi::Error::New(env, "Invalid mouse button specified");
 		}
 	}
 
@@ -182,7 +182,7 @@ Napi::Value mouseClickWrapper(const Napi::CallbackInfo& info)
 	}
 	else if (info.Length() > 2)
 	{
-		throw Napi::Error::New(env, "Invalid number of arguments.");
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	if (!doubleC)
@@ -223,7 +223,7 @@ Napi::Value mouseToggleWrapper(const Napi::CallbackInfo& info)
 		}
 		else
 		{
-			throw Napi::Error::New(env, "Invalid mouse button state specified.");
+			throw Napi::Error::New(env, "Invalid mouse button state specified");
 		}
 	}
 
@@ -235,14 +235,14 @@ Napi::Value mouseToggleWrapper(const Napi::CallbackInfo& info)
 		switch (CheckMouseButton(b, &button))
 		{
 			case -1:
-				throw Napi::Error::New(env, "Null pointer in mouse button code.");
+				throw Napi::Error::New(env, "Null pointer in mouse button code");
 			case -2:
-				throw Napi::Error::New(env, "Invalid mouse button specified.");
+				throw Napi::Error::New(env, "Invalid mouse button specified");
 		}
 	}
 	else if (info.Length() > 2)
 	{
-		throw Napi::Error::New(env, "Invalid number of arguments.");
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	toggleMouse(down, button);
@@ -257,7 +257,7 @@ Napi::Value setMouseDelayWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() != 1)
 	{
-		throw Napi::Error::New(env, "Invalid number of arguments.");
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	mouseDelay = info[0].As<Napi::Number>().Int32Value();
@@ -271,7 +271,7 @@ Napi::Value scrollMouseWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() != 2)
 	{
-    	throw Napi::Error::New(env, "Invalid number of arguments.");
+    	throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	int x = info[0].As<Napi::Number>().Int32Value();
@@ -378,7 +378,7 @@ static KeyNames key_names[] =
 	{ "numpad_-",		K_NUMPAD_MINUS },
 	{ "numpad_*",		K_NUMPAD_MULTIPLY },
 	{ "numpad_/",		K_NUMPAD_DIVIDE },
-	{ "numpad_.",		K_NUMPAD_DECIMAL },
+	{ "numpad_",		K_NUMPAD_DECIMAL },
 
 	{ "lights_mon_up",    K_LIGHTS_MON_UP },
 	{ "lights_mon_down",  K_LIGHTS_MON_DOWN },
@@ -497,15 +497,15 @@ Napi::Value keyTapWrapper(const Napi::CallbackInfo& info)
 			switch (GetFlagsFromValue(info[1], &flags))
 			{
 				case -1:
-					throw Napi::Error::New(env, "Null pointer in key flag.");
+					throw Napi::Error::New(env, "Null pointer in key flag");
 				case -2:
-					throw Napi::Error::New(env, "Invalid key flag specified.");
+					throw Napi::Error::New(env, "Invalid key flag specified");
 			}
 			break;
 		case 1:
 			break;
 		default:
-			throw Napi::Error::New(env, "Invalid number of arguments.");
+			throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
     MMKeyCode key;
@@ -518,9 +518,9 @@ Napi::Value keyTapWrapper(const Napi::CallbackInfo& info)
 	switch(CheckKeyCodes(k, &key))
 	{
 		case -1:
-			throw Napi::Error::New(env, "Null pointer in key code.");
+			throw Napi::Error::New(env, "Null pointer in key code");
 		case -2:
-			throw Napi::Error::New(env, "Invalid key code specified.");
+			throw Napi::Error::New(env, "Invalid key code specified");
 		default:
 			toggleKeyCode(key, true, flags);
 			microsleep(keyboardDelay);
@@ -544,15 +544,15 @@ Napi::Value keyToggleWrapper(const Napi::CallbackInfo& info)
 			switch (GetFlagsFromValue(info[2], &flags))
 			{
 				case -1:
-					throw Napi::Error::New(env, "Null pointer in key flag.");
+					throw Napi::Error::New(env, "Null pointer in key flag");
 				case -2:
-					throw Napi::Error::New(env, "Invalid key flag specified.");
+					throw Napi::Error::New(env, "Invalid key flag specified");
 			}
 			break;
 		case 2:
 			break;
 		default:
-			throw Napi::Error::New(env, "Invalid number of arguments.");
+			throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
     MMKeyCode key;
@@ -578,15 +578,15 @@ Napi::Value keyToggleWrapper(const Napi::CallbackInfo& info)
     }
     else
     {
-        throw Napi::Error::New(env, "Invalid key state specified.");
+        throw Napi::Error::New(env, "Invalid key state specified");
     }
 
 	switch(CheckKeyCodes(k, &key))
 	{
 		case -1:
-			throw Napi::Error::New(env, "Null pointer in key code.");
+			throw Napi::Error::New(env, "Null pointer in key code");
 		case -2:
-			throw Napi::Error::New(env, "Invalid key code specified.");
+			throw Napi::Error::New(env, "Invalid key code specified");
 		default:
 			toggleKeyCode(key, down, flags);
 			microsleep(keyboardDelay);
@@ -602,13 +602,13 @@ Napi::Value unicodeTapWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() != 1)
 	{
-	    throw Napi::Error::New(env, "Invalid number of arguments.");
+	    throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	size_t value = info[0].As<Napi::Number>().Int32Value();
 
 	if (value == 0) {
-		throw Napi::Error::New(env, "Invalid character typed.");
+		throw Napi::Error::New(env, "Invalid character typed");
 	}
 
 	unicodeTap(value);
@@ -621,7 +621,7 @@ Napi::Value typeStringWrapper(const Napi::CallbackInfo& info)
 	Napi::Env env = info.Env();
 
 	if (info.Length() != 1) {
-	    throw Napi::Error::New(env, "Invalid number of arguments.");
+	    throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
     const char *s;
@@ -639,7 +639,7 @@ Napi::Value typeStringDelayedWrapper(const Napi::CallbackInfo& info)
 	Napi::Env env = info.Env();
 
 	if (info.Length() != 2) {
-	    throw Napi::Error::New(env, "Invalid number of arguments.");
+	    throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
     const char *s;
@@ -660,7 +660,7 @@ Napi::Value setKeyboardDelayWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() != 1)
 	{
-        throw Napi::Error::New(env, "Invalid number of arguments.");
+        throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	keyboardDelay = info[0].As<Napi::Number>().Int32Value();
@@ -695,7 +695,7 @@ Napi::Value getPixelColorWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() != 2)
 	{
-		throw Napi::Error::New(env, "Invalid number of arguments.");
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	MMBitmapRef bitmap;
@@ -706,7 +706,7 @@ Napi::Value getPixelColorWrapper(const Napi::CallbackInfo& info)
 
 	if (!pointVisibleOnMainDisplay(MMPointMake(x, y)))
 	{
-		throw Napi::Error::New(env, "Requested coordinates are outside the main screen's dimensions.");
+		throw Napi::Error::New(env, "Requested coordinates are outside the main screen's dimensions");
 	}
 
 	bitmap = copyMMBitmapFromDisplayInRect(MMRectMake(x, y, 1, 1));
@@ -855,7 +855,7 @@ Napi::Value getColorWrapper(const Napi::CallbackInfo& info)
 	Napi::Env env = info.Env();
 
     if (info.Length() != 3) {
-        throw Napi::Error::New(env, "Invalid number of arguments.");
+        throw Napi::Error::New(env, "Invalid number of arguments");
     }
 
 	MMBitmapRef bitmap;
@@ -873,7 +873,7 @@ Napi::Value getColorWrapper(const Napi::CallbackInfo& info)
 	// Make sure the requested pixel is inside the bitmap.
 	if (!MMBitmapPointInBounds(bitmap, MMPointMake(x, y)))
 	{
-		throw Napi::Error::New(env, "Requested coordinates are outside the bitmap's dimensions.");
+		throw Napi::Error::New(env, "Requested coordinates are outside the bitmap's dimensions");
 	}
 
 	color = MMRGBHexAtPoint(bitmap, x, y);

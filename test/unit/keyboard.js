@@ -11,7 +11,7 @@ describe('Keyboard', () => {
   it('taps a key.', () => {
     expect(() => robot.keyTap('a')).not.toThrow();
     expect(() => robot.keyTap('a', 'control')).not.toThrow();
-    expect(() => robot.keyTap()).toThrowError(/Invalid number of arguments./);
+    expect(() => robot.keyTap()).toThrowError(/Invalid number of arguments/);
   });
 
   it('taps a key with a delay.', () => {
@@ -39,7 +39,7 @@ describe('Keyboard', () => {
 
     for (const key in numpadKeys) {
       if (os.platform() === 'linux') {
-        expect(() => robot.keyTap('numpad_' + key)).toThrowError(/Invalid key code specified./);
+        expect(() => robot.keyTap('numpad_' + key)).toThrowError(/Invalid key code specified/);
       } else {
         expect(() => robot.keyTap('numpad_' + key)).not.toThrow();
       }
@@ -53,18 +53,18 @@ describe('Keyboard', () => {
     expect(() => robot.unicodeTap("ち".charCodeAt(0))).not.toThrow();
     expect(() => robot.unicodeTap("嗨".charCodeAt(0))).not.toThrow();
     expect(() => robot.unicodeTap("ఝ".charCodeAt(0))).not.toThrow();
-    expect(() => robot.unicodeTap(0)).toThrowError(/Invalid character typed./);
-    expect(() => robot.unicodeTap()).toThrowError(/Invalid number of arguments./);
+    expect(() => robot.unicodeTap(0)).toThrowError(/Invalid character typed/);
+    expect(() => robot.unicodeTap()).toThrowError(/Invalid number of arguments/);
   });
 
   it('toggles a key.', () => {
     expect(() => robot.keyToggle("a", "down")).not.toThrow();
     expect(() => robot.keyToggle("a", "up")).not.toThrow();
 
-    expect(() => robot.keyToggle("ά", "down")).toThrowError(/Invalid key code specified./);
-    expect(() => robot.keyToggle("ά", "up")).toThrowError(/Invalid key code specified./);
-    expect(() => robot.keyToggle("嗨", "down")).toThrowError(/Invalid key code specified./);
-    expect(() => robot.keyToggle("嗨", "up")).toThrowError(/Invalid key code specified./);
+    expect(() => robot.keyToggle("ά", "down")).toThrowError(/Invalid key code specified/);
+    expect(() => robot.keyToggle("ά", "up")).toThrowError(/Invalid key code specified/);
+    expect(() => robot.keyToggle("嗨", "down")).toThrowError(/Invalid key code specified/);
+    expect(() => robot.keyToggle("嗨", "up")).toThrowError(/Invalid key code specified/);
   });
 
   it('toggles a key with a delay.', () => {
@@ -86,12 +86,12 @@ describe('Keyboard', () => {
 
   it('types a string.', () => {
     expect(() => robot.typeString("Typed rάöち嗨ఝ 1")).not.toThrow();
-    expect(() => robot.typeString()).toThrowError(/Invalid number of arguments./);
+    expect(() => robot.typeString()).toThrowError(/Invalid number of arguments/);
   });
 
   it('types a string with a delay.', () => {
     expect(() => robot.typeStringDelayed("Typed rάöち嗨ఝ with delay 600 cpm", 600)).not.toThrow();
-    expect(() => robot.typeStringDelayed()).toThrowError(/Invalid number of arguments./);
-    expect(() => robot.typeStringDelayed("Typed rάöち嗨ఝ with missing delay")).toThrowError(/Invalid number of arguments./);
+    expect(() => robot.typeStringDelayed()).toThrowError(/Invalid number of arguments/);
+    expect(() => robot.typeStringDelayed("Typed rάöち嗨ఝ with missing delay")).toThrowError(/Invalid number of arguments/);
   });
 });
