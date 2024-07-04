@@ -1,4 +1,4 @@
-const robot = require('..');
+const robot = require('../..');
 
 describe('Bitmap', () => {
   const paramTypeMap = {

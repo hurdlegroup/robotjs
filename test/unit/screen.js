@@ -1,4 +1,4 @@
-const robot = require('..');
+const robot = require('../..');
 const os = require('os');
 
 describe('Screen', () => {

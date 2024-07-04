@@ -277,7 +277,7 @@ void unicodeTap(const unsigned value)
 
 void typeStringDelayed(const char *str, const unsigned cpm)
 {
-	unsigned long n;
+	unsigned long n = 0;
 	unsigned short c;
 	unsigned short c1;
 	unsigned short c2;
@@ -315,9 +315,6 @@ void typeStringDelayed(const char *str, const unsigned cpm)
 		}
 
 		unicodeTap(n);
-
-		if (mspc > 0) {
-			microsleep(mspc);
-		}
+		microsleep(mspc);
 	}
 }

@@ -127,6 +127,7 @@ Napi::Value moveMouseSmoothWrapper(const Napi::CallbackInfo& info)
 
 	MMPoint point;
 	point = MMPointMake(x, y);
+
 	if (info.Length() == 3)
 	{
 		size_t speed = info[2].As<Napi::Number>().Int32Value();
@@ -136,6 +137,7 @@ Napi::Value moveMouseSmoothWrapper(const Napi::CallbackInfo& info)
 	{
 		smoothlyMoveMouse(point, 3.0);
 	}
+
 	microsleep(mouseDelay);
 
 	return Napi::Boolean::New(env, true);
@@ -561,26 +563,23 @@ Napi::Value keyToggleWrapper(const Napi::CallbackInfo& info)
     std::string kstr = info[0].As<Napi::String>();
     k = kstr.c_str();
 
-	if (info.Length() > 1)
-	{
-		const char *d;
+    const char *d;
 
-		std::string dstr = info[1].As<Napi::String>();
-		d = dstr.c_str();
+    std::string dstr = info[1].As<Napi::String>();
+    d = dstr.c_str();
 
-		if (strcmp(d, "down") == 0)
-		{
-			down = true;
-		}
-		else if (strcmp(d, "up") == 0)
-		{
-			down = false;
-		}
-		else
-		{
-			throw Napi::Error::New(env, "Invalid key state specified.");
-		}
-	}
+    if (strcmp(d, "down") == 0)
+    {
+        down = true;
+    }
+    else if (strcmp(d, "up") == 0)
+    {
+        down = false;
+    }
+    else
+    {
+        throw Napi::Error::New(env, "Invalid key state specified.");
+    }
 
 	switch(CheckKeyCodes(k, &key))
 	{
