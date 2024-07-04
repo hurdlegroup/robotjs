@@ -2,7 +2,7 @@ name: Test all versions
 on:
   push:
     branches:
-      - '*'
+      - '**'
       - '!master'
 jobs:
   build:
