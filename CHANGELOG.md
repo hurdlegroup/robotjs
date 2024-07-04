@@ -1,3 +1,10 @@
+## [0.11.9](https://github.com/hurdlegroup/robotjs/compare/v0.11.8...v0.11.9) (2024-07-04)
+
+
+### Bug Fixes
+
+* **npm:** make npm package slightly smaller ([a2b5602](https://github.com/hurdlegroup/robotjs/commit/a2b560201119fccecf6a73bc5b759e470171063a))
+
 ## [0.11.8](https://github.com/hurdlegroup/robotjs/compare/v0.11.7...v0.11.8) (2024-07-04)
 
 
