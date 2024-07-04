@@ -11,7 +11,7 @@ jobs:
           - os: ubuntu-latest
             arch: x64
             build-group: linux-x64
-          - os: macos-11
+          - os: macos-13
             arch: x64
             build-group: darwin-universal
           - os: windows-2019
