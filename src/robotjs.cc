@@ -487,6 +487,8 @@ Napi::Value keyTapWrapper(const Napi::CallbackInfo& info)
 {
 	Napi::Env env = info.Env();
 
+	MMKeyFlags flags = MOD_NONE;
+
 	switch (info.Length())
 	{
 		case 2:
@@ -504,7 +506,6 @@ Napi::Value keyTapWrapper(const Napi::CallbackInfo& info)
 			throw Napi::Error::New(env, "Invalid number of arguments.");
 	}
 
-    MMKeyFlags flags = MOD_NONE;
     MMKeyCode key;
 
     const char *k;
@@ -533,6 +534,8 @@ Napi::Value keyToggleWrapper(const Napi::CallbackInfo& info)
 {
 	Napi::Env env = info.Env();
 
+	MMKeyFlags flags = MOD_NONE;
+
 	switch (info.Length())
 	{
 		case 3:
@@ -550,7 +553,6 @@ Napi::Value keyToggleWrapper(const Napi::CallbackInfo& info)
 			throw Napi::Error::New(env, "Invalid number of arguments.");
 	}
 
-    MMKeyFlags flags = MOD_NONE;
     MMKeyCode key;
 
     bool down;
