@@ -47,6 +47,8 @@ jobs:
           architecture: ${{ matrix.arch }}
       - run: npm install
       - name: Test
+        env:
+          DISPLAY: ':99'
         run: npm run test
       - name: Prebuildify
         run: npm run prebuild-$BUILD_GROUP

@@ -11,8 +11,8 @@
 #include <stdlib.h> /* For atexit() */
 
 static Display *mainDisplay = NULL;
+static char *displayName = NULL;
 static int registered = 0;
-static char *displayName = ":0.0";
 static int hasDisplayNameChanged = 0;
 
 Display *XGetMainDisplay(void)
