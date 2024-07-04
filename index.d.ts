@@ -11,7 +11,9 @@ export interface Bitmap
 
 export interface Screen
 {
+  xDisplayName: string;
   capture(x?: number, y?: number, width?: number, height?: number): Bitmap;
+  updateMetrics(): void;
 }
 
 type Keys = 'backspace' | 'delete' | 'enter' | 'tab' | 'escape' | 'up' | 'down' | 'right' | 'left' | 'home' | 'end' |
@@ -27,17 +29,16 @@ type Keys = 'backspace' | 'delete' | 'enter' | 'tab' | 'escape' | 'up' | 'down' 
     'lights_mon_up' | 'lights_mon_down' |
     'lights_kbd_toggle' | 'lights_kbd_up' | 'lights_kbd_down';
 
-type MouseButton = 'left' | 'right' | 'middle';
-
-
 export function setKeyboardDelay(ms: number): void;
 export function keyTap(key: Keys | string, modifier?: string | string[]): void;
 export function keyToggle(key: Keys | string, down: string, modifier?: string | string[]): void;
 export function unicodeTap(value: number): void;
 export function typeString(string: string): void;
 export function typeStringDelayed(string: string, cpm: number): void;
+
+type MouseButton = 'left' | 'right' | 'middle';
+
 export function setMouseDelay(delay: number): void;
-export function updateScreenMetrics(): void;
 export function moveMouse(x: number, y: number): void;
 export function moveMouseSmooth(x: number, y: number, speed?: number): void;
 export function mouseClick(button?: MouseButton, double?: boolean): void;

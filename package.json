@@ -67,7 +67,6 @@
     "@ingstory/targetpractice": "^0.0.7",
     "prebuildify": "^6.0.1",
     "run-script-os": "^1.1.6",
-    "tape": "^4.17.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^10.0.7",

@@ -1,39 +1,35 @@
-var robot = require('..');
-var pixelColor, screenSize;
+const robot = require('..');
+const os = require('os');
 
 describe('Screen', () => {
-  it('Get pixel color.', function()
+  it('gets the pixel color.', function()
   {
-    expect(pixelColor = robot.getPixelColor(5, 5)).toBeTruthy();
-    expect(pixelColor !== undefined).toBeTruthy();
-    expect(pixelColor.length === 6).toBeTruthy();
+    expect(() => robot.getPixelColor(5, 5)).not.toThrow();
+    const pixelColor = robot.getPixelColor(5, 5);
+    expect(pixelColor).toBeDefined();
+    expect(pixelColor.length).toEqual(6);
     expect(/^[0-9A-F]{6}$/i.test(pixelColor)).toBeTruthy();
 
-    expect(function()
-    {
-      robot.getPixelColor(9999999999999, 9999999999999);
-    }).toThrowError(/outside the main screen/);
-
-    expect(function()
-    {
-      robot.getPixelColor(-1, -1);
-    }).toThrowError(/outside the main screen/);
-
-    expect(function()
-    {
-      robot.getPixelColor(0);
-    }).toThrowError(/Invalid number/);
-
-    expect(function()
-    {
-      robot.getPixelColor(1, 2, 3);
-    }).toThrowError(/Invalid number/);
+    expect(() => robot.getPixelColor(9999999999999, 9999999999999)).toThrowError(/outside the main screen/);
+    expect(() => robot.getPixelColor(-1, -1)).toThrowError(/outside the main screen/);
+    expect(() => robot.getPixelColor(0)).toThrowError(/Invalid number/);
+    expect(() => robot.getPixelColor(1, 2, 3)).toThrowError(/Invalid number/);
   });
 
-  it('Get screen size.', function()
+  it('gets the screen size.', function()
   {
-    expect(screenSize = robot.getScreenSize()).toBeTruthy();
-    expect(screenSize.width !== undefined).toBeTruthy();
-    expect(screenSize.height !== undefined).toBeTruthy();
+    expect(() => robot.getScreenSize()).not.toThrow();
+    const screenSize = robot.getScreenSize();
+    expect(screenSize).toBeDefined();
+    expect(screenSize.width).toBeDefined();
+    expect(screenSize.height).toBeDefined();
   });
+
+  if (os.platform() === 'win32') {
+    it('updates the screen metrics.', function()
+    {
+      // Anyway to test this better?
+      expect(() => robot.updateScreenMetrics()).not.toThrow();
+    });
+  }
 });

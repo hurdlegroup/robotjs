@@ -22,19 +22,21 @@
  */
 H_INLINE void microsleep(double milliseconds)
 {
+    if (milliseconds > 0) {
 #if defined(IS_WINDOWS)
-	Sleep((DWORD)milliseconds); /* (Unfortunately truncated to a 32-bit integer.) */
+        Sleep((DWORD)milliseconds); /* (Unfortunately truncated to a 32-bit integer.) */
 #else
-	/* Technically, nanosleep() is not an ANSI function, but it is the most
-	 * supported precise sleeping function I can find.
-	 *
-	 * If it is really necessary, it may be possible to emulate this with some
-	 * hack using select() in the future if we really have to. */
-	struct timespec sleepytime;
-	sleepytime.tv_sec = milliseconds / 1000;
-	sleepytime.tv_nsec = (milliseconds - (sleepytime.tv_sec * 1000)) * 1000000;
-	nanosleep(&sleepytime, NULL);
+        /* Technically, nanosleep() is not an ANSI function, but it is the most
+         * supported precise sleeping function I can find.
+         *
+         * If it is really necessary, it may be possible to emulate this with some
+         * hack using select() in the future if we really have to. */
+        struct timespec sleepytime;
+        sleepytime.tv_sec = milliseconds / 1000;
+        sleepytime.tv_nsec = (milliseconds - (sleepytime.tv_sec * 1000)) * 1000000;
+        nanosleep(&sleepytime, NULL);
 #endif
+    }
 }
 
 #endif /* MICROSLEEP_H */

@@ -1,15 +1,18 @@
 /* jshint esversion: 6 */
-var robot = require('../..');
-var targetpractice = require('@ingstory/targetpractice/index.js');
-var os = require('os');
-
-robot.setMouseDelay(100);
-
-var target, elements;
+const robot = require('../..');
+const targetPractice = require('@ingstory/targetpractice/index.js');
+const os = require('os');
 
 describe('Integration/Mouse', () => {
-	beforeEach(done => {
-		target = targetpractice.start();
+  let target, elements = undefined;
+
+  beforeAll(() => {
+    //Increase delay to help it reliability.
+    robot.setMouseDelay(100);
+  });
+
+	beforeEach((done) => {
+		target = targetPractice.start();
 		target.once('elements', message => {
 			elements = message;
 			done();
@@ -17,33 +20,29 @@ describe('Integration/Mouse', () => {
 	});
 
 	afterEach(() => {
-		targetpractice.stop();
-		target = null;
+		targetPractice.stop();
+		target = undefined;
 	});
 
-	it('clicks', done => {
-		// Alright we got a click event, did we click the button we wanted?
-		target.once('click', function(e)
-		{
+	it('clicks an element', (done) => {
+		target.once('click', (e) => {
 			expect(e.id).toEqual('button_1');
 			expect(e.type).toEqual('click');
 			done();
 		});
 
-		// For this test we want a button.
-		var button_1 = elements.button_1;
-		// Click it!
-		robot.moveMouse(button_1.x, button_1.y);
+		const buttonTarget = elements.button_1;
+		robot.moveMouse(buttonTarget.x, buttonTarget.y);
 		robot.mouseClick();
 	});
 
-	it('scrolls vertically', done => {
+	it('scrolls vertically in an element', (done) => {
 		target.once('scroll', element => {
 			/**
 			 *  TODO: This is gross! The scroll distance is different for each OS. I want
 			 *  to look into this further, but at least these numbers are consistent.
 			 */
-			var expectedScroll;
+			let expectedScroll = 10;
 			switch(os.platform()) {
 				case 'linux':
 					expectedScroll = 180;
@@ -51,27 +50,26 @@ describe('Integration/Mouse', () => {
 				case 'win32':
 					expectedScroll = 8;
 					break;
-				default:
-					expectedScroll = 10;
 			}
+
 			expect(element.id).toEqual('textarea_1');
 			expect(element.scroll_y).toEqual(expectedScroll);
 			done();
 		});
 
-		var textarea_1 = elements.textarea_1;
-		robot.moveMouse(textarea_1.x, textarea_1.y);
+		const textAreaTarget = elements.textarea_1;
+		robot.moveMouse(textAreaTarget.x, textAreaTarget.y);
 		robot.mouseClick();
 		robot.scrollMouse(0, -10);
 	});
 
-	it('scrolls horizontally', done => {
+	it('scrolls horizontally in an element', done => {
 		target.once('scroll', element => {
 			/**
 			 *  TODO: This is gross! The scroll distance is different for each OS. I want
 			 *  to look into this further, but at least these numbers are consistent.
 			 */
-			var expectedScroll;
+			let expectedScroll = 10;
 			switch(os.platform()) {
 				case 'linux':
 					expectedScroll = 530;
@@ -79,16 +77,15 @@ describe('Integration/Mouse', () => {
 				case 'win32':
 					expectedScroll = 8;
 					break;
-				default:
-					expectedScroll = 10;
 			}
+
 			expect(element.id).toEqual('textarea_1');
 			expect(element.scroll_x).toEqual(expectedScroll);
 			done();
 		});
 
-		var textarea_1 = elements.textarea_1;
-		robot.moveMouse(textarea_1.x, textarea_1.y);
+    const textAreaTarget = elements.textarea_1;
+		robot.moveMouse(textAreaTarget.x, textAreaTarget.y);
 		robot.mouseClick();
 		robot.scrollMouse(-10, 0);
 	});

@@ -1,36 +1,38 @@
-var robotjs = require('node-gyp-build')(__dirname);
+const robotjs = require('node-gyp-build')(__dirname);
 
 module.exports = robotjs;
-
-module.exports.screen = {};
-
-function bitmap(width, height, byteWidth, bitsPerPixel, bytesPerPixel, image)
-{
-    this.width = width;
-    this.height = height;
-    this.byteWidth = byteWidth;
-    this.bitsPerPixel = bitsPerPixel;
-    this.bytesPerPixel = bytesPerPixel;
-    this.image = image;
-
-    this.colorAt = function(x, y)
-    {
-        return robotjs.getColor(this, x, y);
-    };
-
-}
-
+module.exports.screen = {
+    get xDisplayName() {
+        return robotjs.getXDisplayName();
+    },
+    set xDisplayName(value) {
+        robotjs.setXDisplayName(value);
+    }
+};
 module.exports.screen.capture = function(x, y, width, height)
 {
-    //If coords have been passed, use them.
-    if (typeof x !== "undefined" && typeof y !== "undefined" && typeof width !== "undefined" && typeof height !== "undefined")
-    {
+    // If coords have been passed, use them.
+    if (typeof x !== "undefined" && typeof y !== "undefined" && typeof width !== "undefined" && typeof height !== "undefined") {
         b = robotjs.captureScreen(x, y, width, height);
-    }
-    else
-    {
+    } else {
         b = robotjs.captureScreen();
     }
 
-    return new bitmap(b.width, b.height, b.byteWidth, b.bitsPerPixel, b.bytesPerPixel, b.image);
+    const bitmap = {
+        width: b.width,
+        height: b.height,
+        byteWidth: b.byteWidth,
+        bitsPerPixel: b.bitsPerPixel,
+        bytesPerPixel: b.bytesPerPixel,
+        image: b.image,
+    };
+
+    bitmap.colorAt =(x, y) => {
+        return robotjs.getColor(bitmap, x, y);
+    };
+
+    return bitmap;
+};
+module.exports.screen.updateMetrics = function() {
+  robotjs.updateScreenMetrics();
 };

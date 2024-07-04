@@ -1,7 +1,7 @@
-var robot = require('..');
+const robot = require('..');
 
 describe('Bitmap', () => {
-  var params = {
+  const paramTypeMap = {
 		'width': 'number',
 		'height': 'number',
 		'byteWidth': 'number',
@@ -10,43 +10,39 @@ describe('Bitmap', () => {
 		'image': 'object'
 	};
 
-	it('Get a bitmap and check the parameters.', function() {
-		var img = robot.screen.capture();
+	it('gets a bitmap and checks the parameters.', function() {
+		const img = robot.screen.capture();
 
-		for (var x in params)
+		for (const param in paramTypeMap)
 		{
-			expect(typeof img[x]).toEqual(params[x]);
+			expect(typeof img[param]).toEqual(paramTypeMap[param]);
 		}
 	});
 
-	it('Get a bitmap of a specific size.', function()
+	it('gets a bitmap of a specific size.', function()
 	{
-		var size = 10;
-		var img = robot.screen.capture(0, 0, size, size);
+		const captureSize = 10;
+		const img = robot.screen.capture(0, 0, captureSize, captureSize);
 
-		// Support for higher density screens.
-		var multi = img.width / size;
-		var size = size * multi;
-		expect(img.height).toEqual(size);
-		expect(img.width).toEqual(size);
+		const captureRatio = img.width / captureSize;
+		const actualSize = captureSize * captureRatio;
+
+		expect(img.height).toEqual(actualSize);
+		expect(img.width).toEqual(actualSize);
 	});
 
-	it('Get a bitmap and make sure the colorAt works as expected.', function()
+	it('gets a bitmap and make sure the colorAt works as expected.', function()
 	{
-		var img = robot.screen.capture();
-		var hex = img.colorAt(0, 0);
+		const img = robot.screen.capture();
+		const hex = img.colorAt(0, 0);
 
-		// t.ok(.it(hex), "colorAt returned valid hex.");
 		expect(hex).toMatch(/^[0-9A-F]{6}$/i);
 
-		var screenSize = robot.getScreenSize();
-		var width = screenSize.width;
-		var height = screenSize.height;
+		const screenSize = robot.getScreenSize();
+		const captureRatio = img.width / screenSize.width;
+		const width = screenSize.width * captureRatio;
+		const height = screenSize.height * captureRatio;
 
-		// Support for higher density screens.
-		var multi = img.width / width;
-		width = width * multi;
-		height = height * multi;
 		expect(() => img.colorAt(0, height)).toThrowError(/are outside the bitmap/);
 		expect(() => img.colorAt(0, height-1)).not.toThrow();
 		expect(() => img.colorAt(width, 0)).toThrowError(/are outside the bitmap/);
