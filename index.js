@@ -9,8 +9,7 @@ module.exports.screen = {
         robotjs.setXDisplayName(value);
     }
 };
-module.exports.screen.capture = function(x, y, width, height)
-{
+module.exports.screen.capture = function(x, y, width, height) {
     // If coords have been passed, use them.
     if (typeof x !== "undefined" && typeof y !== "undefined" && typeof width !== "undefined" && typeof height !== "undefined") {
         b = robotjs.captureScreen(x, y, width, height);

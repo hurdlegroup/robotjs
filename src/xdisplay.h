@@ -2,8 +2,6 @@
 #ifndef XDISPLAY_H
 #define XDISPLAY_H
 
-#define _POSIX_C_SOURCE 200809L
-
 #include <X11/Xlib.h>
 
 /* Returns the main display, closed either on exit or when closeMainDisplay()
