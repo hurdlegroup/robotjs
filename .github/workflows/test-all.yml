@@ -1,0 +1,43 @@
+name: Test all versions
+on: push
+jobs:
+  build:
+    name: Test ${{ matrix.build-group }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            arch: x64
+            build-group: linux-x64
+          - os: macos-latest
+            arch: x64
+            build-group: darwin-universal
+          - os: windows-latest
+            arch: x86
+            build-group: win32-x86
+          - os: windows-latest
+            arch: x64
+            build-group: win32-x64
+    env:
+      BUILD_GROUP: ${{ matrix.build-group }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install OS Dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get install libxtst-dev libpng++-dev gcc g++ -y
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+          architecture: ${{ matrix.arch }}
+      - run: npm install
+      - name: Test
+        run: npm run test
+      - name: Prebuildify
+        run: npm run prebuild-$BUILD_GROUP
+        shell: bash

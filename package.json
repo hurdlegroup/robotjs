@@ -7,7 +7,6 @@
   "scripts": {
     "test": "run-script-os",
     "test:darwin:linux": "jasmine test/**/*.js",
-    "test-keyboard": "node test/keyboard.js",
     "test:win32": "jasmine test/**/*.js",
     "install": "node-gyp-build",
     "install-debug": "node-gyp-build --debug",
@@ -64,14 +63,14 @@
     "access": "public"
   },
   "devDependencies": {
-    "jasmine": "^2.99.0",
-    "prebuildify": "^6.0.0",
+    "jasmine": "^5.1.0",
+    "prebuildify": "^6.0.1",
     "run-script-os": "^1.1.6",
     "tape": "^4.17.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^10.0.2",
-    "@semantic-release/npm": "^12.0.0",
-    "semantic-release": "^23.0.6"
+    "@semantic-release/github": "^10.0.7",
+    "@semantic-release/npm": "^12.0.1",
+    "semantic-release": "^24.0.0"
   }
 }
