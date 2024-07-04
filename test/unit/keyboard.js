@@ -11,7 +11,7 @@ describe('Keyboard', () => {
   it('taps a key.', () => {
     expect(() => robot.keyTap('a')).not.toThrow();
     expect(() => robot.keyTap('a', 'control')).not.toThrow();
-    expect(() => robot.keyTap()).toThrowError(/Invalid number/);
+    expect(() => robot.keyTap()).toThrowError(/Invalid number of arguments./);
   });
 
   it('taps a key with a delay.', () => {
@@ -24,23 +24,24 @@ describe('Keyboard', () => {
     expect(endTime - startTime).toBeGreaterThanOrEqual(delay);
   });
 
-  it('tap all keys.', () => {
-    const chars = 'abcdefghijklmnopqrstuvwxyz1234567890,./;\'[]\\'.split('');
+  it('taps all keys.', () => {
+    // Creates an array of all visible characters, excluding first (SP/32) and last (DEL/127), 93 characters
+    const standardKeys = [...Array(93).keys()].map(i => String.fromCharCode(i + 33));
 
-    for (const char in chars) {
-      expect(() => robot.keyTap(char)).not.toThrow();
+    for (const key in standardKeys) {
+      expect(() => robot.keyTap(key)).not.toThrow();
     }
   });
 
   it('taps all numpad keys.', () => {
-    const numpadKeys = '0123456789+-*/.'.split('');
+    const numpadKeys = Array.from('0123456789+-*/.');
     numpadKeys.push('lock');
 
-    for (const numpadKey in numpadKeys) {
+    for (const key in numpadKeys) {
       if (os.platform() === 'linux') {
-        expect(() => robot.keyTap('numpad_' + numpadKey)).toThrowError(/Invalid key code/);
+        expect(() => robot.keyTap('numpad_' + key)).toThrowError(/Invalid key code specified./);
       } else {
-        expect(() => robot.keyTap('numpad_' + numpadKey)).not.toThrow();
+        expect(() => robot.keyTap('numpad_' + key)).not.toThrow();
       }
     }
   });
@@ -52,8 +53,8 @@ describe('Keyboard', () => {
     expect(() => robot.unicodeTap("ち".charCodeAt(0))).not.toThrow();
     expect(() => robot.unicodeTap("嗨".charCodeAt(0))).not.toThrow();
     expect(() => robot.unicodeTap("ఝ".charCodeAt(0))).not.toThrow();
-    expect(() => robot.unicodeTap(0)).toThrowError(/Invalid character/);
-    expect(() => robot.unicodeTap()).toThrowError(/Invalid number/);
+    expect(() => robot.unicodeTap(0)).toThrowError(/Invalid character typed./);
+    expect(() => robot.unicodeTap()).toThrowError(/Invalid number of arguments./);
   });
 
   it('toggles a key.', () => {

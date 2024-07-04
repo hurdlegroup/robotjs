@@ -11,8 +11,8 @@ describe('Screen', () => {
 
     expect(() => robot.getPixelColor(9999999999999, 9999999999999)).toThrowError(/outside the main screen/);
     expect(() => robot.getPixelColor(-1, -1)).toThrowError(/outside the main screen/);
-    expect(() => robot.getPixelColor(0)).toThrowError(/Invalid number/);
-    expect(() => robot.getPixelColor(1, 2, 3)).toThrowError(/Invalid number/);
+    expect(() => robot.getPixelColor(0)).toThrowError(/Invalid number of arguments./);
+    expect(() => robot.getPixelColor(1, 2, 3)).toThrowError(/Invalid number of arguments./);
   });
 
   it('gets the screen size.', () => {
