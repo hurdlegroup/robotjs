@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 var robot = require('../..');
-var targetpractice = require('targetpractice/index.js');
+var targetpractice = require('@ingstory/targetpractice/index.js');
 var elements, target;
 
 describe('Integration/Screen', () => {
