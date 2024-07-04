@@ -7,11 +7,11 @@ describe('Integration/Mouse', () => {
   let target, elements = undefined;
 
   beforeAll(() => {
-    //Increase delay to help it reliability.
-    robot.setMouseDelay(100);
+    robot.setMouseDelay(100); //Increase delay to help it reliability.
   });
 
 	beforeEach((done) => {
+    robot.moveMouse(0, 0); // Reset mouse position
 		target = targetPractice.start();
 		target.once('elements', message => {
 			elements = message;
@@ -63,7 +63,7 @@ describe('Integration/Mouse', () => {
 		robot.scrollMouse(0, -10);
 	});
 
-	it('scrolls horizontally in an element', done => {
+	it('scrolls horizontally in an element', (done) => {
 		target.once('scroll', element => {
 			/**
 			 *  TODO: This is gross! The scroll distance is different for each OS. I want

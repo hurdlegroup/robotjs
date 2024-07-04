@@ -2,8 +2,7 @@ const robot = require('../..');
 const os = require('os');
 
 describe('Screen', () => {
-  it('gets the pixel color.', function()
-  {
+  it('gets the pixel color.', () => {
     expect(() => robot.getPixelColor(5, 5)).not.toThrow();
     const pixelColor = robot.getPixelColor(5, 5);
     expect(pixelColor).toBeDefined();
@@ -16,8 +15,7 @@ describe('Screen', () => {
     expect(() => robot.getPixelColor(1, 2, 3)).toThrowError(/Invalid number/);
   });
 
-  it('gets the screen size.', function()
-  {
+  it('gets the screen size.', () => {
     expect(() => robot.getScreenSize()).not.toThrow();
     const screenSize = robot.getScreenSize();
     expect(screenSize).toBeDefined();
@@ -26,8 +24,7 @@ describe('Screen', () => {
   });
 
   if (os.platform() === 'win32') {
-    it('updates the screen metrics.', function()
-    {
+    it('updates the screen metrics.', () => {
       // Anyway to test this better?
       expect(() => robot.updateScreenMetrics()).not.toThrow();
     });

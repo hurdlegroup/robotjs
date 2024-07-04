@@ -10,7 +10,7 @@ describe('Bitmap', () => {
 		'image': 'object'
 	};
 
-	it('gets a bitmap and checks the parameters.', function() {
+	it('gets a bitmap and checks the parameters.', () => {
 		const img = robot.screen.capture();
 
 		for (const param in paramTypeMap)
@@ -19,8 +19,7 @@ describe('Bitmap', () => {
 		}
 	});
 
-	it('gets a bitmap of a specific size.', function()
-	{
+	it('gets a bitmap of a specific size.', () => {
 		const captureSize = 10;
 		const img = robot.screen.capture(0, 0, captureSize, captureSize);
 
@@ -31,8 +30,7 @@ describe('Bitmap', () => {
 		expect(img.width).toEqual(actualSize);
 	});
 
-	it('gets a bitmap and make sure the colorAt works as expected.', function()
-	{
+	it('gets a bitmap and make sure the colorAt works as expected.', () => {
 		const img = robot.screen.capture();
 		const hex = img.colorAt(0, 0);
 

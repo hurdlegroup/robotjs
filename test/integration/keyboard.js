@@ -6,11 +6,11 @@ describe('Integration/Keyboard', () => {
   let target, elements = undefined;
 
   beforeAll(() => {
-    //Increase delay to help it reliability.
-    robot.setMouseDelay(100);
+    robot.setMouseDelay(100); // Increase delay to help it reliability.
   });
 
   beforeEach((done) => {
+    robot.moveMouse(0, 0); // Reset mouse position
     target = targetPractice.start();
     target.once('elements', message => {
       elements = message;
@@ -23,7 +23,7 @@ describe('Integration/Keyboard', () => {
     target = undefined;
   });
 
-  it('types in an element', done => {
+  it('types in an element', (done) => {
     const stringToType = 'hello world';
 
     // Currently Target Practice waits for the "user" to finish typing before sending the event.
