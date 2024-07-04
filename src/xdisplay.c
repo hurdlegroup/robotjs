@@ -58,6 +58,15 @@ char *getXDisplay(void)
 
 void setXDisplay(const char *name)
 {
-	displayName = strdup(name);
+    if (displayName != NULL) {
+        free(displayName);
+    }
+
+    if (name == NULL) {
+        displayName = NULL;
+    } else {
+    	displayName = strdup(name);
+    }
+
 	hasDisplayNameChanged = 1;
 }
