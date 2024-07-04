@@ -1,3 +1,11 @@
+## [0.11.8](https://github.com/hurdlegroup/robotjs/compare/v0.11.7...v0.11.8) (2024-07-04)
+
+
+### Bug Fixes
+
+* **readme:** Update readme require statements ([#24](https://github.com/hurdlegroup/robotjs/issues/24)) ([4de3bd3](https://github.com/hurdlegroup/robotjs/commit/4de3bd38669984846b7d1c89574d6ce43d4a5a9e))
+* **robotjs:** fix [#22](https://github.com/hurdlegroup/robotjs/issues/22), keyTap not working in Windows ([#25](https://github.com/hurdlegroup/robotjs/issues/25)) ([07cd8da](https://github.com/hurdlegroup/robotjs/commit/07cd8da4daff5a15d1e0212e3c5ed647f4c9d7f0))
+
 ## [0.11.7](https://github.com/hurdlegroup/robotjs/compare/v0.11.6...v0.11.7) (2024-05-09)
 
 
