@@ -509,10 +509,11 @@ Napi::Value keyTapWrapper(const Napi::CallbackInfo& info)
 
 	MMKeyFlags flags = MOD_NONE;
 	MMKeyCode key;
+
 	const char *k;
 
-	Napi::String kstr(env, info[0].ToString());
-	k = kstr.Utf8Value().c_str();
+	std::string kstr = info[0].As<Napi::String>();
+	k = kstr.c_str();
 
 	switch (info.Length())
 	{
@@ -568,17 +569,12 @@ Napi::Value keyToggleWrapper(const Napi::CallbackInfo& info)
 	bool down;
 	const char *k;
 
-	//Get arguments from JavaScript.
 	std::string kstr = info[0].As<Napi::String>();
-
-	//Convert arguments to chars.
 	k = kstr.c_str();
 
-	//Check and confirm number of arguments.
 	switch (info.Length())
 	{
 		case 3:
-			//Get key modifier.
 			switch (GetFlagsFromValue(info[2], &flags))
 			{
 				case -1:
@@ -598,7 +594,6 @@ return env.Null();
 return env.Null();
 	}
 
-	//Get down value if provided.
 	if (info.Length() > 1)
 	{
 		const char *d;
@@ -621,7 +616,6 @@ return env.Null();
 		}
 	}
 
-	//Get the actual key.
 	switch(CheckKeyCodes(k, &key))
 	{
 		case -1:
