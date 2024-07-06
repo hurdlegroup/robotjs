@@ -1,3 +1,16 @@
+# [0.12.0](https://github.com/hurdlegroup/robotjs/compare/v0.11.9...v0.12.0) (2024-07-06)
+
+
+### Bug Fixes
+
+* **ci:** fix upload artifact ([8f890ac](https://github.com/hurdlegroup/robotjs/commit/8f890acba1322dcb7897821f08bade8705ddeb76))
+
+
+### Features
+
+* **tests:** add tests for pull-requests, to improve catching any errors ([eadd9d6](https://github.com/hurdlegroup/robotjs/commit/eadd9d68e80f54afb7444a9ee90a58c33928a4b4))
+* **tests:** run tests as part of push to improve reliability ([387ea05](https://github.com/hurdlegroup/robotjs/commit/387ea057a281dcc5939a8b1ff11c50264b3a1679))
+
 ## [0.11.9](https://github.com/hurdlegroup/robotjs/compare/v0.11.8...v0.11.9) (2024-07-04)
 
 
