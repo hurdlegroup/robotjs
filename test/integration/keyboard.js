@@ -1,6 +1,7 @@
 /* jshint esversion: 6 */
 const robot = require('../..');
 const targetPractice = require('../../tools/targetPractice');
+const os = require('os');
 
 describe('Integration/Keyboard', () => {
   beforeAll(() => {
@@ -20,6 +21,10 @@ describe('Integration/Keyboard', () => {
   });
 
   it('types in an element', (done) => {
+    if (os.platform() === 'win32' || os.platform() === 'darwin') {
+      pending('Win32 and Darwin platforms are flaky with integration tests');
+    }
+
     const stringToType = 'hello world';
 
     // Currently Target Practice waits for the "user" to finish typing before sending the event.

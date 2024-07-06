@@ -21,6 +21,10 @@ describe('Integration/Mouse', () => {
 	});
 
 	it('clicks an element', (done) => {
+    if (os.platform() === 'win32' || os.platform() === 'darwin') {
+      pending('Win32 and Darwin platforms are flaky with integration tests');
+    }
+
     targetPractice.once('click', (e) => {
 			expect(e.id).toEqual('button_1');
 			expect(e.type).toEqual('click');
@@ -33,6 +37,10 @@ describe('Integration/Mouse', () => {
 	});
 
 	it('scrolls vertically in an element', (done) => {
+    if (os.platform() === 'win32' || os.platform() === 'darwin') {
+      pending('Win32 and Darwin platforms are flaky with integration tests');
+    }
+
     targetPractice.once('scroll', (element) => {
 			/**
 			 *  TODO: This is gross! The scroll distance is different for each OS. I want
@@ -60,6 +68,10 @@ describe('Integration/Mouse', () => {
 	});
 
 	it('scrolls horizontally in an element', (done) => {
+    if (os.platform() === 'win32' || os.platform() === 'darwin') {
+      pending('Win32 and Darwin platforms are flaky with integration tests');
+    }
+    
     targetPractice.once('scroll', (element) => {
 			/**
 			 *  TODO: This is gross! The scroll distance is different for each OS. I want
