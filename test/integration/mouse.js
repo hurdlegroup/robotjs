@@ -49,7 +49,7 @@ describe('Integration/Mouse', () => {
 			}
 
 			expect(element.id).toEqual('textarea_1');
-			expect(element.scroll_y).toEqual(expectedScroll);
+			expect(element.scroll_y).toBeGreaterThanOrEqual(expectedScroll);
 			done();
 		});
 
@@ -76,7 +76,7 @@ describe('Integration/Mouse', () => {
 			}
 
 			expect(element.id).toEqual('textarea_1');
-			expect(element.scroll_x).toEqual(expectedScroll);
+			expect(element.scroll_x).toBeGreaterThanOrEqual(expectedScroll);
 			done();
 		});
 

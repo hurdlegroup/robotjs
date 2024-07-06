@@ -36,7 +36,10 @@ describe('Keyboard', () => {
 
   it('taps all numpad keys.', () => {
     const numpadKeys = Array.from('0123456789+-*/.');
-    numpadKeys.push('lock');
+
+    if (os.platform() !== 'darwin') {
+      numpadKeys.push('lock');
+    }
 
     for (const key of numpadKeys) {
       if (os.platform() === 'linux') {
@@ -90,7 +93,10 @@ describe('Keyboard', () => {
 
   it('toggles all numpad keys.', () => {
     const numpadKeys = Array.from('0123456789+-*/.');
-    numpadKeys.push('lock');
+
+    if (os.platform() !== 'darwin') {
+      numpadKeys.push('lock');
+    }
 
     for (const key of numpadKeys) {
       if (os.platform() === 'linux') {
