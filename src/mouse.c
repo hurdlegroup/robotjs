@@ -121,9 +121,11 @@ void moveMouse(MMSignedPoint point)
 	CFRelease(move);
 #elif defined(USE_X11)
 	Display *display = XGetMainDisplay();
-	XWarpPointer(display, None, DefaultRootWindow(display),
-	             0, 0, 0, 0, point.x, point.y);
-	XFlush(display);
+
+	if (display) {
+		XWarpPointer(display, None, DefaultRootWindow(display), 0, 0, 0, 0, point.x, point.y);
+    	XFlush(display);
+	}
 #elif defined(IS_WINDOWS)
 
 	if(vscreenWidth<0 || vscreenHeight<0)
@@ -171,14 +173,17 @@ MMSignedPoint getMousePos()
 
 	return MMSignedPointFromCGPoint(point);
 #elif defined(USE_X11)
-	int x, y; /* This is all we care about. Seriously. */
+	int x, y = 0; /* This is all we care about. Seriously. */
 	Window garb1, garb2; /* Why you can't specify NULL as a parameter */
 	int garb_x, garb_y;  /* is beyond me. */
 	unsigned int more_garbage;
 
 	Display *display = XGetMainDisplay();
-	XQueryPointer(display, XDefaultRootWindow(display), &garb1, &garb2,
-	              &x, &y, &garb_x, &garb_y, &more_garbage);
+
+	if (display) {
+		XQueryPointer(display, XDefaultRootWindow(display), &garb1, &garb2,
+    	              &x, &y, &garb_x, &garb_y, &more_garbage);
+	}
 
 	return MMSignedPointMake(x, y);
 #elif defined(IS_WINDOWS)
@@ -207,8 +212,11 @@ void toggleMouse(bool down, MMMouseButton button)
 	CFRelease(event);
 #elif defined(USE_X11)
 	Display *display = XGetMainDisplay();
-	XTestFakeButtonEvent(display, button, down ? True : False, CurrentTime);
-	XFlush(display);
+
+	if (display) {
+		XTestFakeButtonEvent(display, button, down ? True : False, CurrentTime);
+    	XFlush(display);
+	}
 #elif defined(IS_WINDOWS)
 	INPUT mouseInput;
 	mouseInput.type = INPUT_MOUSE;
@@ -303,26 +311,27 @@ void scrollMouse(int x, int y)
 	int xdir = 6; // Button 6 is left, 7 is right.
 	Display *display = XGetMainDisplay();
 
-	if (y < 0){
-		ydir = 5;
-	}
-	if (x < 0){
-		xdir = 7;
-	}
+	if (display) {
+		if (y < 0){
+    		ydir = 5;
+    	}
+    	if (x < 0){
+    		xdir = 7;
+    	}
 
-	int xi;
-	int yi;
-	for (xi = 0; xi < abs(x); xi++) {
-		XTestFakeButtonEvent(display, xdir, 1, CurrentTime);
-		XTestFakeButtonEvent(display, xdir, 0, CurrentTime);
-	}
-	for (yi = 0; yi < abs(y); yi++) {
-		XTestFakeButtonEvent(display, ydir, 1, CurrentTime);
-		XTestFakeButtonEvent(display, ydir, 0, CurrentTime);
-	}
+    	int xi;
+    	int yi;
+    	for (xi = 0; xi < abs(x); xi++) {
+    		XTestFakeButtonEvent(display, xdir, 1, CurrentTime);
+    		XTestFakeButtonEvent(display, xdir, 0, CurrentTime);
+    	}
+    	for (yi = 0; yi < abs(y); yi++) {
+    		XTestFakeButtonEvent(display, ydir, 1, CurrentTime);
+    		XTestFakeButtonEvent(display, ydir, 0, CurrentTime);
+    	}
 
-	XFlush(display);
-
+    	XFlush(display);
+	}
 #elif defined(IS_WINDOWS)
 
 	// Must send x first, otherwise we get stuck when scrolling on y axis

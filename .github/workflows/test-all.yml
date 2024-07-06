@@ -1,5 +1,12 @@
 name: Test all versions
-on: push
+on:
+  push:
+    branches:
+      - '**'
+      - '!master'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     name: Test ${{ matrix.build-group }}
@@ -26,7 +33,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install OS Dependencies
         if: runner.os == 'Linux'
-        run: sudo apt-get install libxtst-dev libpng++-dev gcc g++ -y
+        run: sudo apt-get install libxtst-dev libpng++-dev gcc g++ xvfb -y
+      - name: Run test display
+        if: runner.os == 'Linux'
+        run: Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -37,6 +47,8 @@ jobs:
           architecture: ${{ matrix.arch }}
       - run: npm install
       - name: Test
+        env:
+          DISPLAY: ':99'
         run: npm run test
       - name: Prebuildify
         run: npm run prebuild-$BUILD_GROUP

@@ -1,31 +1,33 @@
 {
   'targets': [{
     'target_name': 'robotjs',
-      'cflags!': [ '-fno-exceptions' ],
-      'cflags_cc!': [ '-fno-exceptions' ],
-	  'xcode_settings': { 'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
-        'CLANG_CXX_LIBRARY': 'libc++',
-        'MACOSX_DEPLOYMENT_TARGET': '10.7',
-        'OTHER_CFLAGS': [
-          '-arch x86_64',
-          '-arch arm64'
-        ],
-        'OTHER_LDFLAGS': [
-          '-arch x86_64',
-          '-arch arm64'
-        ]
-      },
-      'msvs_settings': {
-        'VCCLCompilerTool': { 'ExceptionHandling': 1 },
-      },
+    'dependencies': [
+      '<!(node -p "require(\'node-addon-api\').targets"):node_addon_api_except',
+    ],
     'include_dirs': [
       '<!(node -p "require(\'node-addon-api\').include_dir")',
     ],
-
+    'cflags!': [ '-fno-exceptions' ],
+    'cflags_cc!': [ '-fno-exceptions' ],
+    'xcode_settings': {
+      'GCC_ENABLE_CPP_EXCEPTIONS': 'YES',
+      'CLANG_CXX_LIBRARY': 'libc++',
+      'MACOSX_DEPLOYMENT_TARGET': '10.7',
+      'OTHER_CFLAGS': [
+        '-arch x86_64',
+        '-arch arm64'
+      ],
+      'OTHER_LDFLAGS': [
+        '-arch x86_64',
+        '-arch arm64'
+      ]
+    },
+    'msvs_settings': {
+      'VCCLCompilerTool': { 'ExceptionHandling': 1 },
+    },
     'conditions': [
       ['OS == "mac"', {
         'include_dirs': [
-          '<!(node -p "require(\'node-addon-api\').include_dir")',
           'System/Library/Frameworks/CoreFoundation.Framework/Headers',
           'System/Library/Frameworks/Carbon.Framework/Headers',
           'System/Library/Frameworks/ApplicationServices.framework/Headers',

@@ -55,8 +55,7 @@ Napi::Value dragMouseWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() < 2 || info.Length() > 3)
 	{
-		Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	const int32_t x = info[0].As<Napi::Number>().Int32Value();
@@ -71,13 +70,9 @@ return env.Null();
 		switch (CheckMouseButton(b, &button))
 		{
 			case -1:
-				Napi::Error::New(env, "Null pointer in mouse button code.").ThrowAsJavaScriptException();
-return env.Null();
-				break;
+				throw Napi::Error::New(env, "Null pointer in mouse button code");
 			case -2:
-				Napi::Error::New(env, "Invalid mouse button specified.").ThrowAsJavaScriptException();
-return env.Null();
-				break;
+				throw Napi::Error::New(env, "Invalid mouse button specified");
 		}
 	}
 
@@ -86,7 +81,7 @@ return env.Null();
 	dragMouse(point, button);
 	microsleep(mouseDelay);
 
-	return Napi::Number::New(env, 1);
+	return Napi::Boolean::New(env, true);
 }
 
 Napi::Value updateScreenMetricsWrapper(const Napi::CallbackInfo& info)
@@ -95,7 +90,7 @@ Napi::Value updateScreenMetricsWrapper(const Napi::CallbackInfo& info)
 
 	updateScreenMetrics();
 
-	return Napi::Number::New(env, 1);
+	return Napi::Boolean::New(env, true);
 }
 
 Napi::Value moveMouseWrapper(const Napi::CallbackInfo& info)
@@ -104,8 +99,7 @@ Napi::Value moveMouseWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() != 2)
 	{
-		Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	int32_t x = info[0].As<Napi::Number>().Int32Value();
@@ -116,7 +110,7 @@ return env.Null();
 	moveMouse(point);
 	microsleep(mouseDelay);
 
-	return Napi::Number::New(env, 1);
+	return Napi::Boolean::New(env, true);
 }
 
 Napi::Value moveMouseSmoothWrapper(const Napi::CallbackInfo& info)
@@ -125,14 +119,15 @@ Napi::Value moveMouseSmoothWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() > 3 || info.Length() < 2 )
 	{
-		Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
+
 	size_t x = info[0].As<Napi::Number>().Int32Value();
 	size_t y = info[1].As<Napi::Number>().Int32Value();
 
 	MMPoint point;
 	point = MMPointMake(x, y);
+
 	if (info.Length() == 3)
 	{
 		size_t speed = info[2].As<Napi::Number>().Int32Value();
@@ -142,9 +137,10 @@ return env.Null();
 	{
 		smoothlyMoveMouse(point, 3.0);
 	}
+
 	microsleep(mouseDelay);
 
-	return Napi::Number::New(env, 1);
+	return Napi::Boolean::New(env, true);
 }
 
 Napi::Value getMousePosWrapper(const Napi::CallbackInfo& info)
@@ -153,7 +149,6 @@ Napi::Value getMousePosWrapper(const Napi::CallbackInfo& info)
 
 	MMSignedPoint pos = getMousePos();
 
-	//Return object with .x and .y.
 	Napi::Object obj = Napi::Object::New(env);
 	obj.Set(Napi::String::New(env, "x"), Napi::Number::New(env, (int)pos.x));
 	obj.Set(Napi::String::New(env, "y"), Napi::Number::New(env, (int)pos.y));
@@ -175,13 +170,9 @@ Napi::Value mouseClickWrapper(const Napi::CallbackInfo& info)
 		switch (CheckMouseButton(b, &button))
 		{
 			case -1:
-				Napi::Error::New(env, "Null pointer in mouse button code.").ThrowAsJavaScriptException();
-return env.Null();
-				break;
+				throw Napi::Error::New(env, "Null pointer in mouse button code");
 			case -2:
-				Napi::Error::New(env, "Invalid mouse button specified.").ThrowAsJavaScriptException();
-return env.Null();
-				break;
+				throw Napi::Error::New(env, "Invalid mouse button specified");
 		}
 	}
 
@@ -191,8 +182,7 @@ return env.Null();
 	}
 	else if (info.Length() > 2)
 	{
-		Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	if (!doubleC)
@@ -206,7 +196,7 @@ return env.Null();
 
 	microsleep(mouseDelay);
 
-	return Napi::Number::New(env, 1);
+	return Napi::Boolean::New(env, true);
 }
 
 Napi::Value mouseToggleWrapper(const Napi::CallbackInfo& info)
@@ -233,8 +223,7 @@ Napi::Value mouseToggleWrapper(const Napi::CallbackInfo& info)
 		}
 		else
 		{
-			Napi::Error::New(env, "Invalid mouse button state specified.").ThrowAsJavaScriptException();
-return env.Null();
+			throw Napi::Error::New(env, "Invalid mouse button state specified");
 		}
 	}
 
@@ -246,25 +235,20 @@ return env.Null();
 		switch (CheckMouseButton(b, &button))
 		{
 			case -1:
-				Napi::Error::New(env, "Null pointer in mouse button code.").ThrowAsJavaScriptException();
-return env.Null();
-				break;
+				throw Napi::Error::New(env, "Null pointer in mouse button code");
 			case -2:
-				Napi::Error::New(env, "Invalid mouse button specified.").ThrowAsJavaScriptException();
-return env.Null();
-				break;
+				throw Napi::Error::New(env, "Invalid mouse button specified");
 		}
 	}
 	else if (info.Length() > 2)
 	{
-		Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	toggleMouse(down, button);
 	microsleep(mouseDelay);
 
-	return Napi::Number::New(env, 1);
+	return Napi::Boolean::New(env, true);
 }
 
 Napi::Value setMouseDelayWrapper(const Napi::CallbackInfo& info)
@@ -273,13 +257,12 @@ Napi::Value setMouseDelayWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() != 1)
 	{
-		Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	mouseDelay = info[0].As<Napi::Number>().Int32Value();
 
-	return Napi::Number::New(env, 1);
+	return Napi::Boolean::New(env, true);
 }
 
 Napi::Value scrollMouseWrapper(const Napi::CallbackInfo& info)
@@ -288,8 +271,7 @@ Napi::Value scrollMouseWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() != 2)
 	{
-    	Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+    	throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	int x = info[0].As<Napi::Number>().Int32Value();
@@ -298,7 +280,7 @@ return env.Null();
 	scrollMouse(x, y);
 	microsleep(mouseDelay);
 
-	return Napi::Number::New(env, 1);
+	return Napi::Boolean::New(env, true);
 }
 /*
  _  __          _                         _
@@ -508,12 +490,6 @@ Napi::Value keyTapWrapper(const Napi::CallbackInfo& info)
 	Napi::Env env = info.Env();
 
 	MMKeyFlags flags = MOD_NONE;
-	MMKeyCode key;
-
-	const char *k;
-
-	std::string kstr = info[0].As<Napi::String>();
-	k = kstr.c_str();
 
 	switch (info.Length())
 	{
@@ -521,32 +497,30 @@ Napi::Value keyTapWrapper(const Napi::CallbackInfo& info)
 			switch (GetFlagsFromValue(info[1], &flags))
 			{
 				case -1:
-					Napi::Error::New(env, "Null pointer in key flag.").ThrowAsJavaScriptException();
-return env.Null();
-					break;
+					throw Napi::Error::New(env, "Null pointer in key flag");
 				case -2:
-					Napi::Error::New(env, "Invalid key flag specified.").ThrowAsJavaScriptException();
-return env.Null();
-					break;
+					throw Napi::Error::New(env, "Invalid key flag specified");
 			}
 			break;
 		case 1:
 			break;
 		default:
-			Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+			throw Napi::Error::New(env, "Invalid number of arguments");
 	}
+
+    MMKeyCode key;
+
+    const char *k;
+
+    std::string kstr = info[0].As<Napi::String>();
+    k = kstr.c_str();
 
 	switch(CheckKeyCodes(k, &key))
 	{
 		case -1:
-			Napi::Error::New(env, "Null pointer in key code.").ThrowAsJavaScriptException();
-return env.Null();
-			break;
+			throw Napi::Error::New(env, "Null pointer in key code");
 		case -2:
-			Napi::Error::New(env, "Invalid key code specified.").ThrowAsJavaScriptException();
-return env.Null();
-			break;
+			throw Napi::Error::New(env, "Invalid key code specified");
 		default:
 			toggleKeyCode(key, true, flags);
 			microsleep(keyboardDelay);
@@ -555,22 +529,14 @@ return env.Null();
 			break;
 	}
 
-	return Napi::Number::New(env, 1);
+	return Napi::Boolean::New(env, true);
 }
-
 
 Napi::Value keyToggleWrapper(const Napi::CallbackInfo& info)
 {
 	Napi::Env env = info.Env();
 
 	MMKeyFlags flags = MOD_NONE;
-	MMKeyCode key;
-
-	bool down;
-	const char *k;
-
-	std::string kstr = info[0].As<Napi::String>();
-	k = kstr.c_str();
 
 	switch (info.Length())
 	{
@@ -578,116 +544,114 @@ Napi::Value keyToggleWrapper(const Napi::CallbackInfo& info)
 			switch (GetFlagsFromValue(info[2], &flags))
 			{
 				case -1:
-					Napi::Error::New(env, "Null pointer in key flag.").ThrowAsJavaScriptException();
-return env.Null();
-					break;
+					throw Napi::Error::New(env, "Null pointer in key flag");
 				case -2:
-					Napi::Error::New(env, "Invalid key flag specified.").ThrowAsJavaScriptException();
-return env.Null();
-					break;
+					throw Napi::Error::New(env, "Invalid key flag specified");
 			}
 			break;
 		case 2:
 			break;
 		default:
-			Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+			throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
-	if (info.Length() > 1)
-	{
-		const char *d;
+    MMKeyCode key;
 
-		std::string dstr = info[1].As<Napi::String>();
-		d = dstr.c_str();
+    bool down;
+    const char *k;
 
-		if (strcmp(d, "down") == 0)
-		{
-			down = true;
-		}
-		else if (strcmp(d, "up") == 0)
-		{
-			down = false;
-		}
-		else
-		{
-			Napi::Error::New(env, "Invalid key state specified.").ThrowAsJavaScriptException();
-return env.Null();
-		}
-	}
+    std::string kstr = info[0].As<Napi::String>();
+    k = kstr.c_str();
+
+    const char *d;
+
+    std::string dstr = info[1].As<Napi::String>();
+    d = dstr.c_str();
+
+    if (strcmp(d, "down") == 0)
+    {
+        down = true;
+    }
+    else if (strcmp(d, "up") == 0)
+    {
+        down = false;
+    }
+    else
+    {
+        throw Napi::Error::New(env, "Invalid key state specified");
+    }
 
 	switch(CheckKeyCodes(k, &key))
 	{
 		case -1:
-			Napi::Error::New(env, "Null pointer in key code.").ThrowAsJavaScriptException();
-return env.Null();
-			break;
+			throw Napi::Error::New(env, "Null pointer in key code");
 		case -2:
-			Napi::Error::New(env, "Invalid key code specified.").ThrowAsJavaScriptException();
-return env.Null();
-			break;
+			throw Napi::Error::New(env, "Invalid key code specified");
 		default:
 			toggleKeyCode(key, down, flags);
 			microsleep(keyboardDelay);
+			break;
 	}
 
-	return Napi::Number::New(env, 1);
+	return Napi::Boolean::New(env, true);
 }
 
 Napi::Value unicodeTapWrapper(const Napi::CallbackInfo& info)
 {
 	Napi::Env env = info.Env();
 
+	if (info.Length() != 1)
+	{
+	    throw Napi::Error::New(env, "Invalid number of arguments");
+	}
+
 	size_t value = info[0].As<Napi::Number>().Int32Value();
 
-	if (value != 0) {
-		unicodeTap(value);
-
-		return Napi::Number::New(env, 1);
-	} else {
-		Napi::Error::New(env, "Invalid character typed.").ThrowAsJavaScriptException();
-return env.Null();
+	if (value == 0) {
+		throw Napi::Error::New(env, "Invalid character typed");
 	}
+
+	unicodeTap(value);
+
+	return Napi::Boolean::New(env, true);
 }
 
 Napi::Value typeStringWrapper(const Napi::CallbackInfo& info)
 {
 	Napi::Env env = info.Env();
 
-	if (info.Length() > 0) {
-		const char *s;
-		std::string str = info[0].As<Napi::String>();
-
-		s = str.c_str();
-
-		typeStringDelayed(s, 0);
-
-		return Napi::Number::New(env, 1);
-	} else {
-		Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+	if (info.Length() != 1) {
+	    throw Napi::Error::New(env, "Invalid number of arguments");
 	}
+
+    const char *s;
+    std::string str = info[0].As<Napi::String>();
+
+    s = str.c_str();
+
+    typeStringDelayed(s, 0);
+
+    return Napi::Boolean::New(env, true);
 }
 
 Napi::Value typeStringDelayedWrapper(const Napi::CallbackInfo& info)
 {
 	Napi::Env env = info.Env();
 
-	if (info.Length() > 0) {
-		const char *s;
-		std::string str = info[0].As<Napi::String>();
-
-		s = str.c_str();
-
-	size_t cpm = info[1].As<Napi::Number>().Int32Value();
-
-		typeStringDelayed(s, cpm);
-
-		return Napi::Number::New(env, 1);
-	} else {
-		Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+	if (info.Length() != 2) {
+	    throw Napi::Error::New(env, "Invalid number of arguments");
 	}
+
+    const char *s;
+    std::string str = info[0].As<Napi::String>();
+
+    s = str.c_str();
+
+    size_t cpm = info[1].As<Napi::Number>().Int32Value();
+
+    typeStringDelayed(s, cpm);
+
+    return Napi::Boolean::New(env, true);
 }
 
 Napi::Value setKeyboardDelayWrapper(const Napi::CallbackInfo& info)
@@ -696,13 +660,12 @@ Napi::Value setKeyboardDelayWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() != 1)
 	{
-		Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+        throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	keyboardDelay = info[0].As<Napi::Number>().Int32Value();
 
-	return Napi::Number::New(env, 1);
+    return Napi::Boolean::New(env, true);
 }
 
 /*
@@ -732,8 +695,7 @@ Napi::Value getPixelColorWrapper(const Napi::CallbackInfo& info)
 
 	if (info.Length() != 2)
 	{
-		Napi::Error::New(env, "Invalid number of arguments.").ThrowAsJavaScriptException();
-return env.Null();
+		throw Napi::Error::New(env, "Invalid number of arguments");
 	}
 
 	MMBitmapRef bitmap;
@@ -744,8 +706,7 @@ return env.Null();
 
 	if (!pointVisibleOnMainDisplay(MMPointMake(x, y)))
 	{
-		Napi::Error::New(env, "Requested coordinates are outside the main screen's dimensions.").ThrowAsJavaScriptException();
-return env.Null();
+		throw Napi::Error::New(env, "Requested coordinates are outside the main screen's dimensions");
 	}
 
 	bitmap = copyMMBitmapFromDisplayInRect(MMRectMake(x, y, 1, 1));
@@ -785,8 +746,7 @@ Napi::Value getXDisplayNameWrapper(const Napi::CallbackInfo& info)
 	const char* display = getXDisplay();
 	return Napi::String::New(env, display);
 	#else
-	Napi::Error::New(env, "getXDisplayName is only supported on Linux").ThrowAsJavaScriptException();
-	return env.Null();
+	throw Napi::Error::New(env, "getXDisplayName is only supported on Linux");
 	#endif
 }
 
@@ -797,10 +757,9 @@ Napi::Value setXDisplayNameWrapper(const Napi::CallbackInfo& info)
 	#if defined(USE_X11)
 	std::string string = info[0].As<Napi::String>();
 	setXDisplay(string.c_str());
-	return Napi::Number::New(env, 1);
+	return Napi::Boolean::New(env, true);
 	#else
-	Napi::Error::New(env, "setXDisplayName is only supported on Linux").ThrowAsJavaScriptException();
-	return env.Null();
+	throw Napi::Error::New(env, "setXDisplayName is only supported on Linux");
 	#endif
 }
 
@@ -894,6 +853,11 @@ BMP buildBMP(Napi::Object obj)
 Napi::Value getColorWrapper(const Napi::CallbackInfo& info)
 {
 	Napi::Env env = info.Env();
+
+    if (info.Length() != 3) {
+        throw Napi::Error::New(env, "Invalid number of arguments");
+    }
+
 	MMBitmapRef bitmap;
 	MMRGBHex color;
 
@@ -909,8 +873,7 @@ Napi::Value getColorWrapper(const Napi::CallbackInfo& info)
 	// Make sure the requested pixel is inside the bitmap.
 	if (!MMBitmapPointInBounds(bitmap, MMPointMake(x, y)))
 	{
-		Napi::Error::New(env, "Requested coordinates are outside the bitmap's dimensions.").ThrowAsJavaScriptException();
-return env.Null();
+		throw Napi::Error::New(env, "Requested coordinates are outside the bitmap's dimensions");
 	}
 
 	color = MMRGBHexAtPoint(bitmap, x, y);
@@ -922,7 +885,6 @@ return env.Null();
 	destroyMMBitmap(bitmap);
 
 	return Napi::String::New(env, hex);
-
 }
 
 Napi::Object InitAll(Napi::Env env, Napi::Object exports)

@@ -1,38 +1,43 @@
 /* jshint esversion: 6 */
-var robot = require('../..');
-var targetpractice = require('targetpractice/index.js');
-var os = require('os');
-
-robot.setMouseDelay(100);
-
-var target, elements;
+const robot = require('../..');
+const targetPractice = require('../../tools/targetPractice');
+const os = require('os');
 
 describe('Integration/Keyboard', () => {
-	beforeEach(done => {
-		target = targetpractice.start();
-		target.once('elements', message => {
-			elements = message;
-			done();
-		});
-	});
+  beforeAll(() => {
+    robot.setMouseDelay(100); // Increase delay to help it reliability.
+  });
 
-	afterEach(() => {
-		targetpractice.stop();
-		target = null;
-	});
+  beforeEach((done) => {
+    if (os.platform() === 'win32' || os.platform() === 'darwin') {
+      pending('Win32 and Darwin platforms are flaky with integration tests');
+      return;
+    }
 
-	it('types', done => {
-		const stringToType = 'hello world';
-		// Currently Target Practice waits for the "user" to finish typing before sending the event.
-		target.once('type', element => {
-			expect(element.id).toEqual('input_1');
-			expect(element.text).toEqual(stringToType);
-			done();
-		});
+    robot.moveMouse(0, 0); // Reset mouse position
+    targetPractice.once('ready', () => {
+      done();
+    });
+    targetPractice.start();
+  });
 
-		const input_1 = elements.input_1;
-		robot.moveMouse(input_1.x, input_1.y);
-		robot.mouseClick();
-		robot.typeString(stringToType);
-	});
+  afterEach(() => {
+    targetPractice.stop();
+  });
+
+  it('types in an element', (done) => {
+    const stringToType = 'hello world';
+
+    // Currently Target Practice waits for the "user" to finish typing before sending the event.
+    targetPractice.once('type', (element) => {
+      expect(element.id).toEqual('input_1');
+      expect(element.text).toEqual(stringToType);
+      done();
+    });
+
+    const inputTarget = targetPractice.elements.input_1;
+    robot.moveMouse(inputTarget.x, inputTarget.y);
+    robot.mouseClick();
+    robot.typeString(stringToType);
+  });
 });

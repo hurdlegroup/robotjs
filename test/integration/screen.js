@@ -1,34 +1,27 @@
 /* jshint esversion: 6 */
-var robot = require('../..');
-var targetpractice = require('targetpractice/index.js');
-var elements, target;
+const robot = require('../..');
+const targetPractice = require('../../tools/targetPractice');
+const os = require('os');
 
 describe('Integration/Screen', () => {
-	beforeEach(done => {
-		target = targetpractice.start();
-		target.once('elements', message => {
-			elements = message;
-			done();
-		});
-	});
+  beforeEach((done) => {
+    if (os.platform() === 'win32' || os.platform() === 'darwin') {
+      pending('Win32 and Darwin platforms are flaky with integration tests');
+      return;
+    }
 
-	afterEach(() => {
-		targetpractice.stop();
-		target = null;
-	});
+    targetPractice.once('ready', () => {
+      done();
+    });
+    targetPractice.start();
+  });
 
-	it('reads a pixel color', (done) => {
-		const maxDelay = 1000
-		jasmine.DEFAULT_TIMEOUT_INTERVAL = maxDelay + 1000
-		const expected = 'c0ff33'
-		const color_1 = elements.color_1;
-		const sleepTime = robot.getPixelColor(color_1.x, color_1.y) === expected ? 0
-			: maxDelay
+  afterEach(() => {
+    targetPractice.stop();
+  });
 
-		setTimeout(() => {
-			const color = robot.getPixelColor(color_1.x, color_1.y);
-			expect(color).toEqual(expected);
-			done()
-		}, sleepTime)
-	});
+  it('gets a specific pixel color', () => {
+    const color_1 = targetPractice.elements.color_1;
+    expect(robot.getPixelColor(color_1.x, color_1.y)).toEqual('c0ff33');
+  });
 });

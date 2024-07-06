@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - master
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   build:
     name: Build ${{ matrix.build-group }}
