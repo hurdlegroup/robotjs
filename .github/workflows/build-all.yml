@@ -20,10 +20,10 @@ jobs:
           - os: macos-latest
             arch: x64
             build-group: darwin-universal
-          - os: windows-2019
+          - os: windows-latest
             arch: x86
             build-group: win32-x86
-          - os: windows-2019
+          - os: windows-latest
             arch: x64
             build-group: win32-x64
     env:
@@ -47,7 +47,7 @@ jobs:
         shell: bash
       - uses: actions/upload-artifact@v4
         with:
-          name: prebuilds-${{ matrix.runs-on }}
+          name: prebuilds-${{ matrix.build-group }}
           path: prebuilds/
   publish:
     if: github.ref == 'refs/heads/master'
