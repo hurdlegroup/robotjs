@@ -3,11 +3,16 @@ const robot = require('../..');
 const targetPractice = require('@ingstory/targetpractice/index.js');
 
 describe('Integration/Screen', () => {
+  const targetPracticeDelay = 3000;
   let elements, target = undefined;
 
-  beforeEach(done => {
+  beforeEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL += targetPracticeDelay;
+  });
+
+  beforeEach((done) => {
     target = targetPractice.start();
-    target.once('elements', message => {
+    target.once('elements', (message) => {
       elements = message;
       done();
     });
@@ -19,11 +24,9 @@ describe('Integration/Screen', () => {
   });
 
   it('gets a specific pixel color', (done) => {
-    const maxDelay = 1000;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = maxDelay + 1000;
     const expected = 'c0ff33';
     const color_1 = elements.color_1;
-    const sleepTime = robot.getPixelColor(color_1.x, color_1.y) === expected ? 0 : maxDelay
+    const sleepTime = robot.getPixelColor(color_1.x, color_1.y) === expected ? 0 : targetPracticeDelay
 
     setTimeout(() => {
       const color = robot.getPixelColor(color_1.x, color_1.y);

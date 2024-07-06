@@ -378,7 +378,7 @@ static KeyNames key_names[] =
 	{ "numpad_-",		K_NUMPAD_MINUS },
 	{ "numpad_*",		K_NUMPAD_MULTIPLY },
 	{ "numpad_/",		K_NUMPAD_DIVIDE },
-	{ "numpad_",		K_NUMPAD_DECIMAL },
+	{ "numpad_.",		K_NUMPAD_DECIMAL },
 
 	{ "lights_mon_up",    K_LIGHTS_MON_UP },
 	{ "lights_mon_down",  K_LIGHTS_MON_DOWN },

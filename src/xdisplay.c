@@ -24,12 +24,7 @@ Display *XGetMainDisplay(void)
 	}
 
 	if (!mainDisplay) {
-		if (displayName) {
-		    mainDisplay = XOpenDisplay(displayName);
-		} else {
-		    /* Try using environment variable DISPLAY */
-		    mainDisplay = XOpenDisplay(NULL);
-		}
+		mainDisplay = XOpenDisplay(displayName);
 
 		if (!mainDisplay) {
 			fputs("Could not open main display\n", stderr);

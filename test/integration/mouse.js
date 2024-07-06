@@ -4,16 +4,18 @@ const targetPractice = require('@ingstory/targetpractice/index.js');
 const os = require('os');
 
 describe('Integration/Mouse', () => {
+  const targetPracticeDelay = 3000;
   let target, elements = undefined;
 
   beforeAll(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL += targetPracticeDelay;
     robot.setMouseDelay(100); //Increase delay to help it reliability.
   });
 
 	beforeEach((done) => {
     robot.moveMouse(0, 0); // Reset mouse position
 		target = targetPractice.start();
-		target.once('elements', message => {
+		target.once('elements', (message) => {
 			elements = message;
 			done();
 		});
