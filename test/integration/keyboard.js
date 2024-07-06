@@ -9,6 +9,11 @@ describe('Integration/Keyboard', () => {
   });
 
   beforeEach((done) => {
+    if (os.platform() === 'win32' || os.platform() === 'darwin') {
+      pending('Win32 and Darwin platforms are flaky with integration tests');
+      return;
+    }
+
     robot.moveMouse(0, 0); // Reset mouse position
     targetPractice.once('ready', () => {
       done();
@@ -21,10 +26,6 @@ describe('Integration/Keyboard', () => {
   });
 
   it('types in an element', (done) => {
-    if (os.platform() === 'win32' || os.platform() === 'darwin') {
-      pending('Win32 and Darwin platforms are flaky with integration tests');
-    }
-
     const stringToType = 'hello world';
 
     // Currently Target Practice waits for the "user" to finish typing before sending the event.
