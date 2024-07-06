@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 const robot = require('../..');
-const targetPractice = require('./targetPractice');
+const targetPractice = require('../../tools/targetPractice');
 
 describe('Integration/Keyboard', () => {
   beforeAll(() => {
