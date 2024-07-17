@@ -1,3 +1,10 @@
+## [0.12.2](https://github.com/hurdlegroup/robotjs/compare/v0.12.1...v0.12.2) (2024-07-17)
+
+
+### Bug Fixes
+
+* **package:** make package lighter ([436b4e0](https://github.com/hurdlegroup/robotjs/commit/436b4e087fba33b8617cf749ebdd44df4270c7e3))
+
 ## [0.12.1](https://github.com/hurdlegroup/robotjs/compare/v0.12.0...v0.12.1) (2024-07-17)
 
 
