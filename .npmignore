@@ -1,6 +1,7 @@
 .github/
 build/
 test/
+tools/
 node_modules/
 .releaserc.yml
 .editorconfig
