@@ -1,3 +1,10 @@
+## [0.12.1](https://github.com/hurdlegroup/robotjs/compare/v0.12.0...v0.12.1) (2024-07-17)
+
+
+### Bug Fixes
+
+* **types:** fix types to include missing keys ([abbe1cd](https://github.com/hurdlegroup/robotjs/commit/abbe1cd4e877ba70788586c718a1753627713828))
+
 # [0.12.0](https://github.com/hurdlegroup/robotjs/compare/v0.11.9...v0.12.0) (2024-07-06)
 
 
