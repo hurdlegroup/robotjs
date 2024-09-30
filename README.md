@@ -1,7 +1,7 @@
 <p align="center"><img src="https://cldup.com/1ATDf2JMtv.png"></p>
 
 [![Build all versions and publish to NPM](https://github.com/hurdlegroup/robotjs/actions/workflows/build-all.yml/badge.svg)](https://github.com/hurdlegroup/robotjs/actions/workflows/build-all.yml)
-<a href="https://www.npmjs.com/package/robotjs"><img src="https://img.shields.io/npm/v/@hurdlegroup/robotjs.svg"></a>
+<a href="https://www.npmjs.com/package/@hurdlegroup/robotjs"><img src="https://img.shields.io/npm/v/@hurdlegroup/robotjs.svg"></a>
 
 > Node.js Desktop Automation. Control the mouse, keyboard, and read the screen.
 
