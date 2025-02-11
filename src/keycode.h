@@ -5,7 +5,7 @@
 #include "os.h"
 
 #ifdef __cplusplus
-extern "C" 
+extern "C"
 {
 #endif
 
@@ -14,7 +14,7 @@ extern "C"
 #include <Carbon/Carbon.h> /* Really only need <HIToolbox/Events.h> */
 #include <ApplicationServices/ApplicationServices.h>
 #import <IOKit/hidsystem/ev_keymap.h>
-	
+
 enum _MMKeyCode {
 	K_NOT_A_KEY = 9999,
 	K_BACKSPACE = kVK_Delete,
@@ -67,6 +67,7 @@ enum _MMKeyCode {
 	K_INSERT = K_NOT_A_KEY,
 	K_PRINT_SCREEN = K_NOT_A_KEY,
 	K_MENU = K_NOT_A_KEY,
+	K_SCROLL_LOCK = K_NOT_A_KEY,
 
 	K_NUMPAD_LOCK = K_NOT_A_KEY,
 	K_NUMPAD_0 = kVK_ANSI_Keypad0,
@@ -164,6 +165,7 @@ enum _MMKeyCode {
 	K_INSERT = XK_Insert,
 	K_PRINT_SCREEN = XK_Print,
 	K_MENU = K_NOT_A_KEY,
+	K_SCROLL_LOCK = XK_Scroll_Lock,
 
 	K_NUMPAD_LOCK = K_NOT_A_KEY,
 	K_NUMPAD_0 = K_NOT_A_KEY,
@@ -258,6 +260,7 @@ enum _MMKeyCode {
 	K_PRINT_SCREEN = VK_SNAPSHOT,
 	K_INSERT = VK_INSERT,
 	K_MENU = VK_APPS,
+	K_SCROLL_LOCK = VK_SCROLL,
 
 	K_NUMPAD_LOCK = VK_NUMLOCK,
 	K_NUMPAD_0 = VK_NUMPAD0,
