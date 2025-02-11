@@ -1,3 +1,10 @@
+## [0.12.3](https://github.com/hurdlegroup/robotjs/compare/v0.12.2...v0.12.3) (2025-02-11)
+
+
+### Bug Fixes
+
+* **robotjs:** add scroll lock, fixes [#29](https://github.com/hurdlegroup/robotjs/issues/29) ([#30](https://github.com/hurdlegroup/robotjs/issues/30)) ([872b4ed](https://github.com/hurdlegroup/robotjs/commit/872b4ed5f2acab560c162c5b69019cd13b332196))
+
 ## [0.12.2](https://github.com/hurdlegroup/robotjs/compare/v0.12.1...v0.12.2) (2024-07-17)
 
 
