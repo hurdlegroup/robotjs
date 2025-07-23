@@ -16,7 +16,8 @@
     "prebuild-darwin-universal": "npm run prebuild -- --arch x64+arm64",
     "prebuild-linux-x64": "npm run prebuild -- --arch x64",
     "prebuild-win32-x86": "npm run prebuild -- --arch ia32",
-    "prebuild-win32-x64": "npm run prebuild -- --arch x64"
+    "prebuild-win32-x64": "npm run prebuild -- --arch x64",
+    "prebuild-win32-arm64": "npm run prebuild -- --arch arm64"
   },
   "repository": {
     "type": "git",
